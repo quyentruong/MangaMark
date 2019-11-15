@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Allow: /
+Sitemap: https://mangamark.qtserver.dynu.net/sitemap.xml

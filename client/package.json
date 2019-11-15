@@ -1,0 +1,38 @@
+{
+  "name": "MangaMark",
+  "version": "1.0.0",
+  "description": "Have you ever wonder how to keep tracking your progress in reading manga ? This webapp will help you about it.",
+  "author": "Quyen Truong",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.8.4",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/recaptcha": "^0.6.1",
+    "@nuxtjs/robots": "^2.4.2",
+    "@nuxtjs/sitemap": "^2.0.0",
+    "nuxt": "^2.0.0",
+    "store": "^2.0.12",
+    "vue-clipboard2": "^0.3.1",
+    "vue-warehouse": "^1.0.2",
+    "vuex-map-fields": "^1.3.6"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^1.0.1",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/moment": "^1.4.0",
+    "@nuxtjs/vuetify": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2"
+  }
+}

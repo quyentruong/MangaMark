@@ -1,0 +1,126 @@
+<template>
+  <v-app>
+    <v-app-bar :color="$vuetify.theme.dark === true ? '' : 'blue'" app dark>
+      <v-toolbar-title class="white--text">
+        <v-btn :color="$vuetify.theme.dark === true ? '' : 'white'" to="/" icon>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </v-toolbar-title>
+      <v-spacer />
+      <v-btn @click="setDark" icon>
+        <v-icon v-if="$vuetify.theme.dark">
+          mdi-brightness-6
+        </v-icon>
+        <v-icon v-else>
+          mdi-brightness-7
+        </v-icon>
+      </v-btn>
+      <v-toolbar-items>
+        <template v-if="$auth.loggedIn">
+          <v-menu offset-y close-on-content-click>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                :icon="$vuetify.breakpoint.name === 'xs'"
+                v-on="on"
+                text
+                color="white"
+                dark
+              >
+                <v-icon v-if="$vuetify.breakpoint.name === 'xs'">
+                  mdi-account
+                </v-icon>
+                <span v-else class="bartitle" style="text-transform: none">Welcome, {{ $auth.user.email }}</span>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item to="/profile">
+                <v-list-item-icon>
+                  <v-icon>mdi-account</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Profile</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="logout">
+                <v-list-item-icon>
+                  <v-icon>mdi-logout</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Logout</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+        <template v-else>
+          <v-btn to="/guest/register" color="white" text>
+            Sign Up
+          </v-btn>
+          <v-btn to="/guest/login" color="white" text>
+            Login
+          </v-btn>
+        </template>
+      </v-toolbar-items>
+    </v-app-bar>
+    <v-content>
+      <v-container fluid>
+        <nuxt />
+      </v-container>
+    </v-content>
+    <v-snackbar
+      v-for="(snackbar, index) in snackbars.filter(s => s.showing)"
+      :key="snackbar.text + Math.random()"
+      v-model="snackbar.showing"
+      :timeout="snackbar.timeout"
+      :color="snackbar.color"
+      :style="`bottom: ${(index * 60) + 8}px`"
+    >
+      {{ snackbar.text }}
+
+      <v-btn @click="snackbar.showing = false" text>
+        Close
+      </v-btn>
+    </v-snackbar>
+    <v-footer
+      app
+    >
+      <span>&copy; Quyen Truong 2019</span>
+    </v-footer>
+  </v-app>
+</template>
+
+<script>
+import { mapMultiRowFields } from 'vuex-map-fields'
+export default {
+  computed: {
+    ...mapMultiRowFields([
+      'snackbars'
+    ])
+  },
+  created () {
+    this.$vuetify.theme.dark = this.$warehouse.get('dark', false)
+  },
+  methods: {
+    logout () {
+      this.$auth.logout()
+      this.$store.dispatch('setSnackbar', { text: 'Logging out' })
+    },
+    setDark () {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      this.$warehouse.set('dark', this.$vuetify.theme.dark)
+    }
+  }
+}
+</script>
+<style scoped>
+  /*@media (max-width:400px) and (min-width:300px) {*/
+  /*  .bartitle {*/
+  /*    font-size: 7px;*/
+  /*  }*/
+  /*}*/
+  /*@media (max-width:600px) and (min-width:401px) {*/
+  /*  .bartitle {*/
+  /*    font-size: 12px;*/
+  /*  }*/
+  /*}*/
+</style>
