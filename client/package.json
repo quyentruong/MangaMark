@@ -1,6 +1,6 @@
 {
   "name": "MangaMark",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Have you ever wonder how to keep tracking your progress in reading manga ? This webapp will help you about it.",
   "author": "Quyen Truong",
   "private": true,
@@ -10,7 +10,12 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+    "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+    "rename": "renamer --find html --replace blade.php \"./dist/**\"",
+    "copy1": "copyfiles -V -u 1 -e \"./dist/200.blade.php\" \"./dist/*.blade.php\" \"./dist/guest/*.blade.php\" ../server/resources/views/",
+    "copy2": "copyfiles -V -u 1 \"./dist/_nuxt/**\" ../server/public/",
+    "copy3": "copyfiles -V -f \"./dist/sitemap.xml\" \"./dist/robots.txt\" \"./dist/sw.js\" ../server/public/",
+    "postbuild": "yarn rename && yarn copy1 && yarn copy2 && yarn copy3"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.8.4",
@@ -32,7 +37,10 @@
     "@nuxtjs/moment": "^1.4.0",
     "@nuxtjs/vuetify": "^1.0.0",
     "babel-eslint": "^10.0.1",
+    "cheerio": "^1.0.0-rc.3",
+    "copyfiles": "^2.1.1",
     "eslint": "^6.1.0",
-    "eslint-plugin-nuxt": ">=0.4.2"
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "renamer": "^1.1.4"
   }
 }

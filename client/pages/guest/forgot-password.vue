@@ -48,10 +48,10 @@ export default {
     ...validations
   }),
   head: {
-    title: 'Forgot Password',
-    meta: [
-      { hid: 'description', name: 'description', content: "Don't worry if you forgot your password" }
-    ]
+    title: 'Forgot Password'
+  //   meta: [
+  //     { hid: 'description', name: 'description', content: "Don't worry if you forgot your password" }
+  //   ]
   },
   methods: {
     async request () {

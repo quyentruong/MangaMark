@@ -75,10 +75,10 @@ export default {
     ...validations
   }),
   head: {
-    title: 'Register',
-    meta: [
-      { hid: 'description', name: 'description', content: 'Sign up to explore new world of MangaMark' }
-    ]
+    title: 'Register'
+  //   meta: [
+  //     { hid: 'description', name: 'description', content: 'Sign up to explore new world of MangaMark' }
+  //   ]
   },
   methods: {
     onError () {

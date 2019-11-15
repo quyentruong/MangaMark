@@ -85,10 +85,10 @@ export default {
     ...validations
   }),
   head: {
-    title: 'Profile',
-    meta: [
-      { hid: 'description', name: 'description', content: 'Modify your name, email, and password' }
-    ]
+    title: 'Profile'
+  //   meta: [
+  //     { hid: 'description', name: 'description', content: 'Modify your name, email, and password' }
+  //   ]
   },
   computed: {
     ...mapFields({
