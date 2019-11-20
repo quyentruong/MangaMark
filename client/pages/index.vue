@@ -17,6 +17,7 @@
           prepend-inner-icon="mdi-magnify"
           label="Search"
           single-line
+          clearable
           hide-details
           filled
           rounded

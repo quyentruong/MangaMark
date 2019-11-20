@@ -48,7 +48,7 @@ function meta ({ route, html }) {
   const metaTags = {
     name: routeMeta[route].name,
     description: routeMeta[route].description,
-    image: '',
+    image: process.env.URL + '/favicon.png',
     url: process.env.URL + route
   }
 

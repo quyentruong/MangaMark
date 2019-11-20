@@ -11,7 +11,7 @@ export default {
     crossorigin: 'use-credentials',
     runtimeCaching: [
       {
-        urlPattern: 'https://mangamark.qtserver.dynu.net/api/profile/',
+        urlPattern: process.env.URL + '/api/profile/',
         strategyOptions: {
           cacheName: 'profile',
           cacheExpiration: {
@@ -81,7 +81,7 @@ export default {
     version: 2 // Version
   },
   sitemap: {
-    hostname: 'https://mangamark.qtserver.dynu.net',
+    hostname: process.env.URL,
     defaults: {
       changefreq: 'daily',
       priority: 1,
@@ -110,7 +110,7 @@ export default {
   robots: {
     UserAgent: '*',
     Allow: '/',
-    Sitemap: 'https://mangamark.qtserver.dynu.net/sitemap.xml'
+    Sitemap: process.env.URL + '/sitemap.xml'
   },
 
   auth: {
