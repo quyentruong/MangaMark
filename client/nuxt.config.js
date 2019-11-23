@@ -27,8 +27,8 @@ export default {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    titleTemplate: '%s - ' + 'MangaMark',
+    // title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -96,12 +96,21 @@ export default {
         'sizes': '1024x1024',
         'type': 'image/png'
       }]
+    },
+    meta: {
+      ogType: false,
+      ogTitle: false,
+      ogDescription: false,
+      description: false
     }
   },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
+  env: {
+    baseUrl: process.env.API_URL
+  },
   axios: {
     // baseURL: 'https://api.qtserver.dynu.net/api'
     baseURL: process.env.API_URL
@@ -162,14 +171,14 @@ export default {
   ** Build configuration
   */
   build: {
-    filenames: {
-      app: ({ isDev }) => isDev ? '[name].js' : '[name].js',
-      chunk: ({ isDev }) => isDev ? '[name].js' : '[name].js',
-      css: ({ isDev }) => isDev ? '[name].css' : '[name].css',
-      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[name].[ext]',
-      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[name].[ext]',
-      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[name].[ext]'
-    },
+    // filenames: {
+    //   app: ({ isDev }) => isDev ? '[name].js' : '[name].js',
+    //   chunk: ({ isDev }) => isDev ? '[name].js' : '[name].js',
+    //   css: ({ isDev }) => isDev ? '[name].css' : '[name].css',
+    //   img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[name].[ext]',
+    //   font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[name].[ext]',
+    //   video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[name].[ext]'
+    // },
     /*
     ** You can extend webpack config here
     */

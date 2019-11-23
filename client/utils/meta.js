@@ -30,7 +30,7 @@ const routeMeta = {
 
 function metaMarkup ({ name, description, image, url }) {
   return `
-    <meta name="description" content="${description}"
+    <meta name="description" content="${description}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="${name}">
     <meta property="og:description" content="${description}">

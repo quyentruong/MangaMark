@@ -111,12 +111,9 @@ export default {
       modelstate: {}
     }
   },
-  head: {
+  head: () => ({
     title: 'Index'
-    // meta: [
-    //   { hid: 'description', name: 'description', content: 'Manage your list of interests' }
-    // ]
-  },
+  }),
   watch: {
     options: {
       handler () {
