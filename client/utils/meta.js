@@ -1,4 +1,5 @@
 const cheerio = require('cheerio')
+const minify = require('html-minifier').minify
 
 const routeMeta = {
   '/profile': {
@@ -60,9 +61,10 @@ function meta ({ route, html }) {
 
   // Append them to <head>
   $('head').append(tags)
-
+  // minify result
   // Return new HTML
-  return $.html()
+  return minify($.html(), {
+    collapseWhitespace: true })
 }
 
 exports.meta = meta
