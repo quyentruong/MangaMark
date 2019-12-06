@@ -7,7 +7,7 @@
     persistent
     large
   >
-    <span :id="columnName === 'name' ? 'itemName': ''">{{ cell.item[columnName] }}</span>
+    <span :class="[columnName === 'name' ? 'itemName': '', oldRead()]">{{ cell.item[columnName] }}</span>
     <template v-slot:input>
       <v-text-field
         v-model="cell.item[columnName]"
@@ -39,6 +39,16 @@ export default {
     this.enabled = this.$warehouse.get('slot', 'Manga')
   },
   methods: {
+    oldRead () {
+      const lastRead = this.$moment.utc(this.cell.item.updated_at).local().format('YYYY-MM-DD HH:mm:ss')
+      const now = this.$moment()
+      const diff = now.diff(lastRead, 'days')
+      if (diff >= 30) {
+        return 'old'
+      } else {
+        return ''
+      }
+    },
     save (action) {
       const item = action
       item.action = this.columnName === 'name' ? 'name' : 'number'
@@ -47,10 +57,10 @@ export default {
         this.$store.dispatch('setSnackbar', { text: 'Data saved' })
       }).catch((error) => {
         if (error.response.status === 422) {
-          this.$emit('modifyItem')
           this.$store.dispatch('setSnackbar', { color: 'error', text: error.response.data.error[this.columnName][0] })
         }
       })
+      this.$emit('modifyItem')
     },
     cancel () {
       this.$store.dispatch('setSnackbar', { color: 'error', text: 'Canceled' })
@@ -64,15 +74,18 @@ export default {
 
 <style scoped>
   @media only screen and (min-width: 600px) {
-    #itemName {
+    .itemName {
       font-family: 'Be Vietnam', sans-serif;
       font-size: 17px;
     }
   }
   @media only screen and (min-width: 960px) {
-    #itemName {
+    .itemName {
       font-family: 'Be Vietnam', sans-serif;
       font-size: 26px;
     }
+  }
+  .old {
+    text-decoration: line-through;
   }
 </style>

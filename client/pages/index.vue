@@ -46,7 +46,7 @@
           <!--        }"-->
           <!--        Starting column name-->
           <template v-for="slot in $store.state.itemSlots" v-slot:[slot.name]="props">
-            <ModifyCell :key="slot.name" :cell="props" :column-name="slot.value" @modifyItem="modifyChild" />
+            <ModifyCell :key="slot.name" :cell="props" :column-name="slot.value" :class="oldRead(props)" @modifyItem="modifyChild" />
           </template>
           <!--        Ending column chapter or episode-->
           <template v-slot:item.updated_at="{ item }">
@@ -142,6 +142,9 @@ export default {
     this.options = this.$warehouse.get(`options_${this.enabled}`, {})
   },
   methods: {
+    oldRead (props) {
+      // console.log(props)
+    },
     modifyChild () {
       this.fetchItem()
     },
