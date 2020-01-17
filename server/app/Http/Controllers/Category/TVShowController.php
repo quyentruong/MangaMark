@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\MangaRequest;
-use App\Manga;
+use App\Http\Requests\Category\TVShowRequest;
+use App\TVShow;
 use App\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class MangaController extends Controller
+class TVShowController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +21,9 @@ class MangaController extends Controller
      */
     public function index(Request $request)
     {
-        $mangas = User::find($request->user()->id)->mangas()->get();
+        $tvshows = User::find($request->user()->id)->tvshows()->get();
         return response()->json([
-            'data' => $mangas
+            'data' => $tvshows
         ]);
     }
 
@@ -40,24 +40,24 @@ class MangaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param MangaRequest $request
+     * @param TVShowRequest $request
      * @return JsonResponse
      */
-    public function store(MangaRequest $request)
+    public function store(TVShowRequest $request)
     {
-        $manga = new Manga($request->all());
+        $tvshow = new TVShow($request->all());
         $user = User::find($request->get('user_id'));
-        $user->mangas()->save($manga);
-        return response()->json($manga);
+        $user->tvshows()->save($tvshow);
+        return response()->json($tvshow, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Manga $manga
+     * @param TVShow $tvshow
      * @return Response
      */
-    public function show(Manga $manga)
+    public function show(TVShow $tvshow)
     {
         //
     }
@@ -65,10 +65,10 @@ class MangaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Manga $manga
-     * @return Response
+     * @param TVShow $tvshow
+     * @return void
      */
-    public function edit(Manga $manga)
+    public function edit(TVShow $tvshow)
     {
         //
     }
@@ -76,26 +76,26 @@ class MangaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param MangaRequest $request
-     * @param Manga $manga
+     * @param TVShowRequest $request
+     * @param TVShow $tvshow
      * @return JsonResponse
      */
-    public function update(MangaRequest $request, Manga $manga)
+    public function update(TVShowRequest $request, TVShow $tvshow)
     {
-        $manga->update($request->all());
-        return response()->json($manga);
+        $tvshow->update($request->all());
+        return response()->json($tvshow);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Manga $manga
+     * @param TVShow $tvshow
      * @return JsonResponse
      * @throws Exception
      */
-    public function destroy(Manga $manga)
+    public function destroy(TVShow $tvshow)
     {
-        $manga->delete();
+        $tvshow->delete();
         return response()->json(null,204);
     }
 }

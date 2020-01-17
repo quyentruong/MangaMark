@@ -17,6 +17,13 @@ export default () => ({
       { text: 'Episode', value: 'quantity' },
       { text: 'Last Watched', value: 'updated_at' },
       { text: 'Actions', value: 'action', sortable: false }
+    ],
+    'TVShow': [
+      { text: 'Name', value: 'name' },
+      { text: 'Season', value: 'season' },
+      { text: 'Episode', value: 'quantity' },
+      { text: 'Last Watched', value: 'updated_at' },
+      { text: 'Actions', value: 'action', sortable: false }
     ]
   },
   currentHeader: {},

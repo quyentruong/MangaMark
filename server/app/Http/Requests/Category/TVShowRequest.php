@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class MangaRequest extends FormRequest
+class TVShowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +27,19 @@ class MangaRequest extends FormRequest
         if (strcmp($this->get('action'), 'name') === 0){
             return [
                 'user_id' => 'required|numeric',
-                'name' => 'required|unique:mangas,name,NULL,id,user_id,'.$this->user_id
+                'name' => 'required|unique:t_v_shows,name,NULL,id,user_id,'.$this->user_id
             ];
         }
         if (strcmp($this->get('action'), 'number') === 0){
             return [
                 'user_id' => 'required|numeric',
-                'quantity' => 'required|numeric|min:1'
+                'season' => 'required_without:quantity|numeric|min:1',
+                'quantity' => 'required_without:season|numeric|min:1'
             ];
         }
         return [
-            'name' => 'required|unique:mangas,name,NULL,id,user_id,'.$this->user_id,
+            'name' => 'required|unique:t_v_shows,name,NULL,id,user_id,'.$this->user_id,
+            'season' => 'required|numeric|min:1',
             'quantity' => 'required|numeric|min:1'
         ];
     }

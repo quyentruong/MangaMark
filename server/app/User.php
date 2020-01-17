@@ -42,6 +42,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Anime::class);
     }
 
+    public function tvshows()
+    {
+        return $this->hasMany(TVShow::class);
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

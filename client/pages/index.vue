@@ -104,7 +104,8 @@ export default {
       enabled: '',
       slots: [
         'Manga',
-        'Anime'
+        'Anime',
+        'TVShow'
       ],
       headersSlot: {},
       items: [],

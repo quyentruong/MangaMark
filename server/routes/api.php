@@ -42,6 +42,9 @@ Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
         Route::resource('category/anime', 'AnimeController', [
             'only' => ['index', 'store', 'update', 'destroy']
         ]);
+        Route::resource('category/tvshow', 'TVShowController', [
+            'only' => ['index', 'store', 'update', 'destroy']
+        ]);
     });
 
     Route::group(['namespace' => 'Profile'], function () {

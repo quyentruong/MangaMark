@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\AnimeRequest;
 use App\User;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,7 +17,7 @@ class AnimeController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function index(Request $request)
     {
@@ -40,7 +41,7 @@ class AnimeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param AnimeRequest $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(AnimeRequest $request)
     {
@@ -77,7 +78,7 @@ class AnimeController extends Controller
      *
      * @param AnimeRequest $request
      * @param Anime $anime
-     * @return Response
+     * @return JsonResponse
      */
     public function update(AnimeRequest $request, Anime $anime)
     {
@@ -89,7 +90,7 @@ class AnimeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Anime $anime
-     * @return Response
+     * @return JsonResponse
      * @throws Exception
      */
     public function destroy(Anime $anime)

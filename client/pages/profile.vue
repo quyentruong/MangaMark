@@ -49,6 +49,14 @@
               disabled
             />
           </v-col>
+          <v-col>
+            <v-text-field
+              v-model="$auth.user.tvshows_count"
+              label="Number of TV Shows"
+              prepend-icon="mdi-television"
+              disabled
+            />
+          </v-col>
         </v-row>
         <v-text-field
           v-model="new Date($auth.user.created_at).toString()"

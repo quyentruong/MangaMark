@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class User extends JsonResource
@@ -9,7 +10,7 @@ class User extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
@@ -21,8 +22,9 @@ class User extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'mangas_count' => sizeof($this->mangas),
-            'animes_count' => sizeof($this->animes)
+            'mangas_count' => count($this->mangas),
+            'animes_count' => count($this->animes),
+            'tvshows_count' => count($this->tvshows)
         ];
         // return parent::toArray($request);
     }
