@@ -7,7 +7,7 @@
     persistent
     large
   >
-    <span :class="[columnName === 'name' ? 'itemName': '', oldRead()]">{{ cell.item[columnName] }}</span>
+    <span :class="[columnName === 'name' ? 'itemName': '', oldRead()]">{{ compressTitle(cell.item[columnName]) }}</span>
     <template v-slot:input>
       <v-text-field
         v-model="cell.item[columnName]"
@@ -39,6 +39,9 @@ export default {
     this.enabled = this.$warehouse.get('slot', 'Manga')
   },
   methods: {
+    compressTitle (title) {
+      if (title.length > 22) { return title.substr(0, 22) + '...' } else { return title }
+    },
     oldRead () {
       const lastRead = this.$moment.utc(this.cell.item.updated_at).local().format('YYYY-MM-DD HH:mm:ss')
       const now = this.$moment()
