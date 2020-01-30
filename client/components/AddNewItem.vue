@@ -18,7 +18,7 @@
               <v-col cols="12" sm="6" md="4">
                 <v-text-field v-model="form.name" :rules="[required('Name')]" :error-messages="modelstate['name']" label="Name" counter />
               </v-col>
-              <v-col v-if="enabled==='Anime'" cols="12" sm="6" md="4">
+              <v-col v-if="enabled!=='Manga'" cols="12" sm="6" md="4">
                 <v-text-field
                   v-model="form.season"
                   :rules="[required('Season'), quantity()]"

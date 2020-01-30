@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     compressTitle (title) {
-      if (title.length > 22) { return title.substr(0, 22) + '...' } else { return title }
+      const maxlength = 18
+      if (title.length > maxlength) { return title.substr(0, maxlength) + '.' } else { return title }
     },
     oldRead () {
       const lastRead = this.$moment.utc(this.cell.item.updated_at).local().format('YYYY-MM-DD HH:mm:ss')
@@ -62,8 +63,9 @@ export default {
         if (error.response.status === 422) {
           this.$store.dispatch('setSnackbar', { color: 'error', text: error.response.data.error[this.columnName][0] })
         }
+      }).finally(() => {
+        this.$emit('modifyItem')
       })
-      this.$emit('modifyItem')
     },
     cancel () {
       this.$store.dispatch('setSnackbar', { color: 'error', text: 'Canceled' })

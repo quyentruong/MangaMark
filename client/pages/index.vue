@@ -54,30 +54,64 @@
           </template>
           <template v-slot:item.action="{ item }">
             <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" column-name="quantity" />
-            <v-icon
-              @click="deleteItem(item)"
-              class="mr-2"
-              color="red"
-              size="25px"
-            >
-              mdi-delete
-            </v-icon>
-            <v-icon
-              @click="googleItem(item)"
-              class="mr-2"
-              color="blue"
-              size="25px"
-            >
-              mdi-google
-            </v-icon>
-            <v-icon
-              @click="copyItem(item)"
-              class="mr-2"
-              color="green"
-              size="25px"
-            >
-              mdi-content-copy
-            </v-icon>
+            <v-menu offset-y close-on-content-click>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                  color="blue"
+                  dark
+                >
+                  <v-icon>
+                    mdi-account
+                  </v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item @click="deleteItem(item)">
+                  <v-list-item-icon>
+                    <v-icon
+                      class="mr-2"
+                      color="red"
+                      size="25px"
+                    >
+                      mdi-delete
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>Delete</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item @click="googleItem(item)">
+                  <v-list-item-icon>
+                    <v-icon
+                      class="mr-2"
+                      color="blue"
+                      size="25px"
+                    >
+                      mdi-google
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>Google</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item @click="copyItem(item)">
+                  <v-list-item-icon>
+                    <v-icon
+                      class="mr-2"
+                      color="green"
+                      size="25px"
+                    >
+                      mdi-content-copy
+                    </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>Copy</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </template>
         </v-data-table>
         <div class="text-center">
@@ -163,9 +197,9 @@ export default {
     },
 
     googleItem (item) {
-      let url = encodeURI(`https://www.google.com/search?q=${item.name} chapter ${parseInt(item.quantity) + 1}`)
-      if (this.enabled === 'Anime') {
-        url = encodeURI(`https://www.google.com/search?q=${item.name} season ${parseInt(item.season)} episode ${parseInt(item.quantity) + 1}`)
+      let url = encodeURI(`https://www.google.com/search?q=${item.name} season ${parseInt(item.season)} episode ${parseInt(item.quantity) + 1}`)
+      if (this.enabled === 'Manga') {
+        url = encodeURI(`https://www.google.com/search?q=${item.name} chapter ${parseInt(item.quantity) + 1}`)
       }
       window.open(url, '_blank')
     },
