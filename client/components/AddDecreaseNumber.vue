@@ -1,6 +1,7 @@
 <template>
   <span>
     <v-icon
+      v-if="buttonType==='+'"
       @click="modifyQuantity(item, columnName,'+')"
       class="mr-2"
       color="green"
@@ -8,14 +9,21 @@
     >
       mdi-arrow-up-circle-outline
     </v-icon>
-    <v-icon
-      @click="modifyQuantity(item, columnName,'-')"
-      class="mr-2"
-      color="red"
-      size="25px"
-    >
-      mdi-arrow-down-circle-outline
-    </v-icon>
+    <v-list-item @click="modifyQuantity(item, columnName,'-')" v-else>
+      <v-list-item-icon>
+        <v-icon
+          class="mr-2"
+          color="red"
+          size="25px"
+        >
+          mdi-arrow-down-circle-outline
+        </v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>
+        <v-list-item-title>Decrease</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+
   </span>
 </template>
 
@@ -36,6 +44,10 @@ export default {
     enabled: {
       type: String,
       default: ''
+    },
+    buttonType: {
+      type: String,
+      default: '+'
     }
   },
   methods: {
@@ -48,10 +60,12 @@ export default {
 
       item[type] = temp
       item.action = 'number'
+      const text = action === '+' ? 'Increase' : 'Decrease'
+      const color = action === '+' ? 'primary' : 'secondary'
 
       this.$axios.$put(`category/${this.enabled.toLowerCase()}/${item.id}`, item).then(() => {
         this.$emit('modifyItem')
-        this.$store.dispatch('setSnackbar', { text: 'Data updated' })
+        this.$store.dispatch('setSnackbar', { color, text: text + ' activated' })
       })
     },
     simplePlusMinus (a, b, action) {

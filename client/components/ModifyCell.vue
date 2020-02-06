@@ -4,7 +4,6 @@
     @save="save(cell.item)"
     @cancel="cancel(cell)"
     @open="open"
-    persistent
     large
   >
     <span :class="[columnName === 'name' ? 'itemName': '', oldRead()]">{{ compressTitle(cell.item[columnName]) }}</span>
@@ -40,8 +39,14 @@ export default {
   },
   methods: {
     compressTitle (title) {
-      const maxlength = 18
-      if (title.length > maxlength) { return title.substr(0, maxlength) + '.' } else { return title }
+      if (typeof title === 'string') {
+        const lastWordLength = title.split(' ').pop().length
+        const maxLength = 32 - lastWordLength
+        if (this.$vuetify.breakpoint.name === 'sm' && title.length > maxLength) {
+          return title.substr(0, maxLength).trim() + '+'
+        }
+      }
+      return title
     },
     oldRead () {
       const lastRead = this.$moment.utc(this.cell.item.updated_at).local().format('YYYY-MM-DD HH:mm:ss')
@@ -58,7 +63,7 @@ export default {
       item.action = this.columnName === 'name' ? 'name' : 'number'
 
       this.$axios.$put(`category/${this.enabled.toLowerCase()}/${item.id}`, item).then(() => {
-        this.$store.dispatch('setSnackbar', { text: 'Data saved' })
+        this.$store.dispatch('setSnackbar', { text: item.name + ' updated' })
       }).catch((error) => {
         if (error.response.status === 422) {
           this.$store.dispatch('setSnackbar', { color: 'error', text: error.response.data.error[this.columnName][0] })

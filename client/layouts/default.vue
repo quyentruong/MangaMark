@@ -7,6 +7,9 @@
         </v-btn>
       </v-toolbar-title>
       <v-spacer />
+      <v-label>{{ $vuetify.breakpoint.name }}</v-label>
+      <v-spacer />
+      <v-label>{{ $vuetify.breakpoint.width }}</v-label>
       <v-btn @click="setDark" icon>
         <v-icon v-if="$vuetify.theme.dark">
           mdi-brightness-6
@@ -84,7 +87,7 @@
     <v-footer
       app
     >
-      <span>&copy; Quyen Truong 2019</span>
+      <span>&copy; Quyen Truong {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -98,6 +101,7 @@ export default {
     ])
   },
   created () {
+    // console.log(this.$vuetify.breakpoint)
     this.$vuetify.theme.dark = this.$warehouse.get('dark', false)
   },
   methods: {
@@ -112,7 +116,10 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
+  .theme--dark.v-icon,.theme--light.v-icon {
+    opacity: 1.0!important;
+  }
   /*@media (max-width:400px) and (min-width:300px) {*/
   /*  .bartitle {*/
   /*    font-size: 7px;*/

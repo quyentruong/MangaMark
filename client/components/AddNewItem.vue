@@ -89,7 +89,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.$axios.$post(`category/${this.enabled.toLowerCase()}/`, this.form).then((response) => {
           this.dialog = false
-          this.$store.dispatch('setSnackbar', { text: 'Data saved' })
+          this.$store.dispatch('setSnackbar', { text: 'New item added' })
           this.$emit('modifyItem')
           this.$refs.form.resetValidation()
           this.form = this.initialForm()

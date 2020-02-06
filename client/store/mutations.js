@@ -7,6 +7,9 @@ export default {
     state.currentHeader[obj.slot] = obj.array
   },
   SET_SNACKBAR (state, snackbar) {
+    if (state.snackbars.length >= 5) {
+      state.snackbars.shift()
+    }
     state.snackbars = state.snackbars.concat(snackbar)
   },
   updateField

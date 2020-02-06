@@ -53,35 +53,23 @@
             <div>{{ $moment.utc(item.updated_at).local().format('YYYY-MM-DD HH:mm:ss') }}</div>
           </template>
           <template v-slot:item.action="{ item }">
-            <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" column-name="quantity" />
+            <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="+" column-name="quantity" />
             <v-menu offset-y close-on-content-click>
               <template v-slot:activator="{ on }">
                 <v-btn
-                  icon
                   v-on="on"
-                  color="blue"
+                  icon
+                  color="cyan"
                   dark
                 >
                   <v-icon>
-                    mdi-account
+                    mdi-tools
                   </v-icon>
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item @click="deleteItem(item)">
-                  <v-list-item-icon>
-                    <v-icon
-                      class="mr-2"
-                      color="red"
-                      size="25px"
-                    >
-                      mdi-delete
-                    </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>Delete</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+                <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="-" column-name="quantity" />
+                <DeleteDialog :item="item" @deleteItem="deleteItem" />
                 <v-list-item @click="googleItem(item)">
                   <v-list-item-icon>
                     <v-icon
@@ -127,8 +115,9 @@
 import AddNewItem from '../components/AddNewItem'
 import ModifyCell from '../components/ModifyCell'
 import AddDecreaseNumber from '../components/AddDecreaseNumber'
+import DeleteDialog from '../components/DeleteDialog'
 export default {
-  components: { AddDecreaseNumber, ModifyCell, AddNewItem },
+  components: { DeleteDialog, AddDecreaseNumber, ModifyCell, AddNewItem },
   auth: false,
   data () {
     return {
@@ -190,7 +179,8 @@ export default {
 
     deleteItem (item) {
       const index = this.items.indexOf(item)
-      confirm(`Are you sure you want to delete ${item.name}?`) && this.$axios.$delete(`category/${this.enabled.toLowerCase()}/${item.id}`).then(() => {
+      // confirm(`Are you sure you want to delete ${item.name}?`) &&
+      this.$axios.$delete(`category/${this.enabled.toLowerCase()}/${item.id}`).then(() => {
         this.$store.dispatch('setSnackbar', { color: 'error', text: 'Data deleted' })
         this.items.splice(index, 1)
       })
