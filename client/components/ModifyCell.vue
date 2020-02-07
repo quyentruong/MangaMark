@@ -41,7 +41,8 @@ export default {
     compressTitle (title) {
       if (typeof title === 'string') {
         const lastWordLength = title.split(' ').pop().length
-        const maxLength = 32 - lastWordLength
+        let maxLength = 32 - lastWordLength
+        if (Object.keys(this.cell.item).length === 7) { maxLength -= 12 }
         if (this.$vuetify.breakpoint.name === 'sm' && title.length > maxLength) {
           return title.substr(0, maxLength).trim() + '+'
         }
