@@ -5,8 +5,6 @@
     </div>
     <v-card v-else>
       <v-card-title>
-        {{ enabled }}
-        <v-spacer />
         <!--        Starting Slot-->
         <v-select v-model="enabled" :items="slots" label="Slot" />
         <!--        Ending Slot-->
