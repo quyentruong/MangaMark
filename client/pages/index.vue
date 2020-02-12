@@ -44,7 +44,14 @@
           <!--        }"-->
           <!--        Starting column name-->
           <template v-for="slot in $store.state.itemSlots" v-slot:[slot.name]="props">
-            <ModifyCell :key="slot.name" :cell="props" :column-name="slot.value" :class="oldRead(props)" @modifyItem="modifyChild" />
+            <ModifyCell
+              :key="slot.name"
+              :cell="props"
+              :column-name="slot.value"
+              :class="oldRead(props)"
+              @modifyItem="modifyChild"
+              :enabled="enabled"
+            />
           </template>
           <!--        Ending column chapter or episode-->
           <template v-slot:item.updated_at="{ item }">

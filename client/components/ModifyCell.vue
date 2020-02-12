@@ -32,6 +32,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    enabled: {
+      type: String,
+      default: ''
     }
   },
   created () {
@@ -41,11 +45,17 @@ export default {
     compressTitle (title) {
       if (typeof title === 'string') {
         const lastWordLength = title.split(' ').pop().length
-        let maxLength = 32 - lastWordLength
-        if (Object.keys(this.cell.item).length === 7) { maxLength -= 12 }
-        if (this.$vuetify.breakpoint.name === 'sm' && title.length > maxLength) {
-          return title.substr(0, maxLength).trim() + '+'
+        let maxLength = title.length
+
+        if (this.$vuetify.breakpoint.name === 'sm') {
+          maxLength = 32 - lastWordLength
         }
+
+        if (this.$vuetify.breakpoint.name === 'md') {
+          maxLength = 61 - lastWordLength
+        }
+        if (this.enabled !== 'Manga') { maxLength -= 12 }
+        if (title.length > maxLength) { return title.substr(0, maxLength).trim() + '+' }
       }
       return title
     },
