@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     compressTitle (title) {
-      if (typeof title === 'string') {
+      if (typeof title === 'string' && (this.$vuetify.breakpoint.name === 'sm' || this.$vuetify.breakpoint.name === 'md')) {
         const lastWordLength = title.split(' ').pop().length
         let maxLength = title.length
 
