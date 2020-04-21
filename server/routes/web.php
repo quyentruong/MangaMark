@@ -25,6 +25,7 @@ Route::get('/guest/login', 'FrontEndController@login')->name('frontend.login');
 Route::get('/guest/register', 'FrontEndController@register')->name('frontend.register');
 Route::get('/guest/forgot-password', 'FrontEndController@forgot_password')->name('frontend.forgot_password');
 Route::get('/guest/reset-password', 'FrontEndController@reset_password')->name('frontend.reset_password');
+Route::get('/guest/verify', 'FrontEndController@verify')->name('frontend.verify');
 
 // SPA
 //Route::get(

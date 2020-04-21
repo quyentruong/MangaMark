@@ -57,6 +57,7 @@ export default {
     this.len = Object.keys(query).length
     this.$axios.$post('auth/verify', query).then((response) => {
       setTimeout(() => { this.verify = true }, 2000)
+      setTimeout(() => { this.$router.push('/guest/login') }, 4000)
     })
       .catch((error) => {
         if (error.response.status === 401) {

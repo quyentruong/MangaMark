@@ -24,5 +24,8 @@ class FrontEndController extends Controller
     public function index() {
         return view('index');
     }
+    public function verify() {
+        return view('guest.verify');
+    }
 
 }
