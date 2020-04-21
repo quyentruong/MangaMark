@@ -17,7 +17,9 @@
 //        'version' => '1.0.0',
 //    ];
 //});
-
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 Route::get('/', 'FrontEndController@index')->name('frontend.index');
 Route::get('/profile', 'FrontEndController@profile')->name('frontend.profile');
