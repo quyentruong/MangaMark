@@ -20,9 +20,6 @@ use Illuminate\Http\Request;
 //        'version' => '1.0.0',
 //    ];
 //});
-if (App::environment('production')) {
-    URL::forceScheme('https');
-}
 
 Route::group(['namespace' => 'Auth'], function () {
 
