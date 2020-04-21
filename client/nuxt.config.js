@@ -7,22 +7,22 @@ export default {
   router: {
     middleware: ['auth']
   },
-  manifest: {
-    crossorigin: 'use-credentials',
-    runtimeCaching: [
-      {
-        urlPattern: process.env.URL + '/api/profile/',
-        strategyOptions: {
-          cacheName: 'profile',
-          cacheExpiration: {
-            maxEntries: 10,
-            maxAgeSeconds: 300
-          }
-        },
-        method: 'GET'
-      }
-    ]
-  },
+  // manifest: {
+  //   crossorigin: 'use-credentials',
+  //   runtimeCaching: [
+  //     {
+  //       urlPattern: process.env.URL + '/api/profile/',
+  //       strategyOptions: {
+  //         cacheName: 'profile',
+  //         cacheExpiration: {
+  //           maxEntries: 10,
+  //           maxAgeSeconds: 300
+  //         }
+  //       },
+  //       method: 'GET'
+  //     }
+  //   ]
+  // },
   /*
   ** Headers of the page
   */
@@ -66,44 +66,44 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    // '@nuxtjs/pwa',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     '@nuxtjs/recaptcha',
     ['vue-warehouse/nuxt', {
       vuex: true
-    }],
-    '@nuxtjs/robots',
-    '@nuxtjs/sitemap'
+    }]
+    // '@nuxtjs/robots',
+    // '@nuxtjs/sitemap'
   ],
   recaptcha: {
     siteKey: '6LdA47AUAAAAAHgoSOBrxHt_gpgtvodDhBs9Atl4', // Site key for requests
     version: 2 // Version
   },
-  sitemap: {
-    hostname: process.env.URL,
-    defaults: {
-      changefreq: 'daily',
-      priority: 1,
-      lastmod: new Date(),
-      lastmodrealtime: true
-    }
-  },
-  pwa: {
-    manifest: {
-      'icons': [{
-        'src': '/favicon.png',
-        'sizes': '1024x1024',
-        'type': 'image/png'
-      }]
-    },
-    meta: {
-      ogType: false,
-      ogTitle: false,
-      ogDescription: false,
-      description: false
-    }
-  },
+  // sitemap: {
+  //   hostname: process.env.URL,
+  //   defaults: {
+  //     changefreq: 'daily',
+  //     priority: 1,
+  //     lastmod: new Date(),
+  //     lastmodrealtime: true
+  //   }
+  // },
+  // pwa: {
+  //   manifest: {
+  //     'icons': [{
+  //       'src': '/favicon.png',
+  //       'sizes': '1024x1024',
+  //       'type': 'image/png'
+  //     }]
+  //   },
+  //   meta: {
+  //     ogType: false,
+  //     ogTitle: false,
+  //     ogDescription: false,
+  //     description: false
+  //   }
+  // },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -116,11 +116,11 @@ export default {
     baseURL: process.env.API_URL
   },
 
-  robots: {
-    UserAgent: '*',
-    Allow: '/',
-    Sitemap: process.env.URL + '/sitemap.xml'
-  },
+  // robots: {
+  //   UserAgent: '*',
+  //   Allow: '/',
+  //   Sitemap: process.env.URL + '/sitemap.xml'
+  // },
 
   auth: {
     strategies: {
