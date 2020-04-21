@@ -14,12 +14,12 @@ use Illuminate\Http\Request;
 */
 
 
-Route::get('/', function () {
-    return [
-        'app' => 'Laravel 6 API Boilerplate',
-        'version' => '1.0.0',
-    ];
-});
+//Route::get('/', function () {
+//    return [
+//        'app' => 'Laravel 6 API Boilerplate',
+//        'version' => '1.0.0',
+//    ];
+//});
 
 Route::group(['namespace' => 'Auth'], function () {
 
@@ -27,9 +27,11 @@ Route::group(['namespace' => 'Auth'], function () {
 
     Route::post('auth/register', ['as' => 'register', 'uses' => 'RegisterController@register']);
     // Send reset password mail
-    Route::post('auth/recovery', 'ForgotPasswordController@sendPasswordResetLink');
+    Route::post('auth/recovery', ['as' => 'recovery', 'uses' => 'ForgotPasswordController@sendPasswordResetLink']);
     // handle reset password form process
-    Route::post('auth/reset', 'ResetPasswordController@callResetPassword');
+    Route::post('auth/reset',  ['as' => 'reset', 'uses' => 'ResetPasswordController@callResetPassword']);
+    // handle reset password form process
+    Route::post('auth/verify', ['as' => 'verify', 'uses' => 'VerifyAccountController@verify']);
 
 });
 

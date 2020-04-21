@@ -57,11 +57,13 @@ export default {
     form: {},
     ...validations
   }),
-  head: {
-    title: 'Login'
-  //   meta: [
-  //     { hid: 'description', name: 'description', content: 'Ready to explore new world of MangaMark' }
-  //   ]
+  head () {
+    return {
+      title: 'Login'
+      //   meta: [
+      //     { hid: 'description', name: 'description', content: 'Ready to explore new world of MangaMark' }
+      //   ]
+    }
   },
   methods: {
     async login () {

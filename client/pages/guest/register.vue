@@ -74,11 +74,13 @@ export default {
     form: {},
     ...validations
   }),
-  head: {
-    title: 'Register'
-  //   meta: [
-  //     { hid: 'description', name: 'description', content: 'Sign up to explore new world of MangaMark' }
-  //   ]
+  head () {
+    return {
+      title: 'Register'
+      //   meta: [
+      //     { hid: 'description', name: 'description', content: 'Sign up to explore new world of MangaMark' }
+      //   ]
+    }
   },
   methods: {
     onError () {
@@ -96,8 +98,7 @@ export default {
         }
         this.modelstate = {}
         await this.$axios.$post('auth/register', this.form).then(() => {
-          this.$auth.login({ data: this.form })
-          this.$store.dispatch('setSnackbar', { text: 'Logging in' })
+          this.$router.push('/guest/verify')
         })
           .catch((error) => {
             if (error.response.status === 422) {

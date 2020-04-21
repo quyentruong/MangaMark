@@ -92,11 +92,13 @@ export default {
     modelstate: {},
     ...validations
   }),
-  head: {
-    title: 'Profile'
-  //   meta: [
-  //     { hid: 'description', name: 'description', content: 'Modify your name, email, and password' }
-  //   ]
+  head () {
+    return {
+      title: 'Profile'
+      //   meta: [
+      //     { hid: 'description', name: 'description', content: 'Modify your name, email, and password' }
+      //   ]
+    }
   },
   computed: {
     ...mapFields({

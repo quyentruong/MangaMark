@@ -87,6 +87,7 @@ export default {
     },
     save () {
       if (this.$refs.form.validate()) {
+        this.form.name = this.form.name.trim()
         this.$axios.$post(`category/${this.enabled.toLowerCase()}/`, this.form).then((response) => {
           this.dialog = false
           this.$store.dispatch('setSnackbar', { text: 'New item added' })

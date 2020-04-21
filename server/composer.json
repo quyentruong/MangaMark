@@ -11,8 +11,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "barryvdh/laravel-cors": "^0.11.4",
         "fideloper/proxy": "^4.0",
+        "fruitcake/laravel-cors": "^1.0",
         "jeremykenedy/laravel-roles": "^2.3",
         "laravel/framework": "^6.0",
         "laravel/slack-notification-channel": "^2.0",

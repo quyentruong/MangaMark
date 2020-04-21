@@ -72,11 +72,13 @@ export default {
   created () {
     this.form.token = this.$route.query.token
   },
-  head: {
-    title: 'Reset Password'
-  //   meta: [
-  //     { hid: 'description', name: 'description', content: 'Reset password to get access again' }
-  //   ]
+  head () {
+    return {
+      title: 'Reset Password'
+      //   meta: [
+      //     { hid: 'description', name: 'description', content: 'Reset password to get access again' }
+      //   ]
+    }
   },
   methods: {
     async reset () {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!$auth.loggedIn">
-      Please login to enjoy MangaMark. If you don't have an account, sign up one for free.
+      Please login to enjoy MangaMark. If you don't have an account, sign up one for free. update
     </div>
     <v-card v-else>
       <v-card-title>

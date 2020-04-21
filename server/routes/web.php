@@ -18,28 +18,13 @@
 //    ];
 //});
 
-Route::get('/', function () {
-    return view('index');
-});
 
-Route::get('/profile', function () {
-    return view('profile');
-});
-Route::get('/guest/login', function () {
-    return view('guest.login');
-});
-
-Route::get('/guest/register', function () {
-    return view('guest.register');
-});
-
-Route::get('/guest/forgot-password', function () {
-    return view('guest.forgot-password');
-});
-
-Route::get('/guest/reset-password', function () {
-    return view('guest.reset-password');
-});
+Route::get('/', 'FrontEndController@index')->name('frontend.index');
+Route::get('/profile', 'FrontEndController@profile')->name('frontend.profile');
+Route::get('/guest/login', 'FrontEndController@login')->name('frontend.login');
+Route::get('/guest/register', 'FrontEndController@register')->name('frontend.register');
+Route::get('/guest/forgot-password', 'FrontEndController@forgot_password')->name('frontend.forgot_password');
+Route::get('/guest/reset-password', 'FrontEndController@reset_password')->name('frontend.reset_password');
 
 // SPA
 //Route::get(

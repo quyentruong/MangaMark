@@ -25,6 +25,10 @@ const routeMeta = {
   '/guest/reset-password': {
     name: 'Reset Password',
     description: 'Reset password to get access again'
+  },
+  '/guest/verify': {
+    name: 'Verify',
+    description: 'Verify account before login'
   }
 
 }
