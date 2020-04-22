@@ -10,8 +10,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
         "ext-redis": "*",
+        "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "jeremykenedy/laravel-roles": "^2.3",
