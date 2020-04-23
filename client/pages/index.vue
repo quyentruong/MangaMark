@@ -4,31 +4,31 @@
       Please login to enjoy MangaMark. If you don't have an account, sign up one for free. update
     </div>
     <v-card v-else>
-      <v-card-title>
-        <!--        Starting Slot-->
-        <v-select v-model="enabled" :items="slots" label="Slot" />
-        <!--        Ending Slot-->
-        <v-spacer />
-        <!--        Starting Filter-->
-        <v-text-field
-          v-model="search"
-          prepend-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          clearable
-          hide-details
-          filled
-          rounded
-          dense
-        />
-        <!--        Ending Filter-->
-        <v-spacer />
-        <!--        Starting Add new item-->
-        <AddNewItem :enabled="enabled" @modifyItem="modifyChild" />
-      <!--        Ending Add new Item-->
-      </v-card-title>
-      <!--      Starting datatable-->
       <client-only>
+        <v-card-title>
+          <!--        Starting Slot-->
+          <v-select v-model="enabled" :items="slots" label="Slot" />
+          <!--        Ending Slot-->
+          <v-spacer />
+          <!--        Starting Filter-->
+          <v-text-field
+            v-model="search"
+            prepend-inner-icon="mdi-magnify"
+            label="Search"
+            single-line
+            clearable
+            hide-details
+            filled
+            rounded
+            dense
+          />
+          <!--        Ending Filter-->
+          <v-spacer />
+          <!--        Starting Add new item-->
+          <AddNewItem :enabled="enabled" @modifyItem="modifyChild" />
+          <!--        Ending Add new Item-->
+        </v-card-title>
+        <!--      Starting datatable-->
         <v-data-table
           :headers="headersSlot[enabled]"
           :items="items"
@@ -110,8 +110,8 @@
         <div class="text-center">
           <v-pagination v-model="options.page" :length="pageCount" :total-visible="7" />
         </div>
+        <!--      Ending datatable-->
       </client-only>
-    <!--      Ending datatable-->
     </v-card>
   </div>
 </template>
