@@ -16,7 +16,8 @@
     "copy1": "copyfiles -V -u 1 -e \"./dist/200.blade.php\" \"./dist/*.blade.php\" \"./dist/guest/*.blade.php\" ../server/resources/views/",
     "copy2": "copyfiles -V -u 1 \"./dist/_nuxt/**\" ../server/public/",
     "copy3": "copyfiles -V -f \"./dist/sitemap.xml\" \"./dist/robots.txt\" \"./dist/sw.js\" ../server/public/",
-    "postbuild": "yarn clean && yarn rename && yarn copy1 && yarn copy2 && yarn copy3"
+    "postbuild": "yarn clean && yarn rename && yarn copy1 && yarn copy2 && yarn copy3",
+    "postgenerate": "yarn clean && yarn rename && yarn copy1 && yarn copy2 && yarn copy3"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.8.4",

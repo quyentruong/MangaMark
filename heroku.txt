@@ -1,1 +1,9 @@
+https://devcenter.heroku.com/articles/buildpacks
+https://devcenter.heroku.com/articles/heroku-cli-commands
+https://devcenter.heroku.com/articles/git-clone-heroku-app
+
+
+heroku buildpacks:set https://github.com/heroku/heroku-buildpack-php
+heroku buildpacks:add https://github.com/daetherius/heroku-buildpack-mysql
+
 git subtree push --prefix server heroku master
