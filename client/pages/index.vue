@@ -4,114 +4,112 @@
       Please login to enjoy MangaMark. If you don't have an account, sign up one for free. update
     </div>
     <v-card v-else>
-      <client-only>
-        <v-card-title>
-          <!--        Starting Slot-->
-          <v-select v-model="enabled" :items="slots" label="Slot" />
-          <!--        Ending Slot-->
-          <v-spacer />
-          <!--        Starting Filter-->
-          <v-text-field
-            v-model="search"
-            prepend-inner-icon="mdi-magnify"
-            label="Search"
-            single-line
-            clearable
-            hide-details
-            filled
-            rounded
-            dense
+      <v-card-title>
+        <!--        Starting Slot-->
+        <v-select v-model="enabled" :items="slots" label="Slot" />
+        <!--        Ending Slot-->
+        <v-spacer />
+        <!--        Starting Filter-->
+        <v-text-field
+          v-model="search"
+          prepend-inner-icon="mdi-magnify"
+          label="Search"
+          single-line
+          clearable
+          hide-details
+          filled
+          rounded
+          dense
+        />
+        <!--        Ending Filter-->
+        <v-spacer />
+        <!--        Starting Add new item-->
+        <AddNewItem :enabled="enabled" @modifyItem="modifyChild" />
+        <!--        Ending Add new Item-->
+      </v-card-title>
+      <!--      Starting datatable-->
+      <v-data-table
+        :headers="headersSlot[enabled]"
+        :items="items"
+        :search="search"
+        :options.sync="options"
+        @page-count="pageCount = $event"
+        hide-default-footer
+      >
+        <!--        :footer-props="{-->
+        <!--          showFirstLastPage: true,-->
+        <!--          showCurrentPage: true,-->
+        <!--          disableItemsPerPage: true-->
+        <!--        }"-->
+        <!--        Starting column name-->
+        <template v-for="slot in $store.state.itemSlots" v-slot:[slot.name]="props">
+          <ModifyCell
+            :key="slot.name"
+            :cell="props"
+            :column-name="slot.value"
+            :class="oldRead(props)"
+            @modifyItem="modifyChild"
+            :enabled="enabled"
           />
-          <!--        Ending Filter-->
-          <v-spacer />
-          <!--        Starting Add new item-->
-          <AddNewItem :enabled="enabled" @modifyItem="modifyChild" />
-          <!--        Ending Add new Item-->
-        </v-card-title>
-        <!--      Starting datatable-->
-        <v-data-table
-          :headers="headersSlot[enabled]"
-          :items="items"
-          :search="search"
-          :options.sync="options"
-          @page-count="pageCount = $event"
-          hide-default-footer
-        >
-          <!--        :footer-props="{-->
-          <!--          showFirstLastPage: true,-->
-          <!--          showCurrentPage: true,-->
-          <!--          disableItemsPerPage: true-->
-          <!--        }"-->
-          <!--        Starting column name-->
-          <template v-for="slot in $store.state.itemSlots" v-slot:[slot.name]="props">
-            <ModifyCell
-              :key="slot.name"
-              :cell="props"
-              :column-name="slot.value"
-              :class="oldRead(props)"
-              @modifyItem="modifyChild"
-              :enabled="enabled"
-            />
-          </template>
-          <!--        Ending column chapter or episode-->
-          <template v-slot:item.updated_at="{ item }">
-            <div>{{ $moment.utc(item.updated_at).local().format('YYYY-MM-DD HH:mm:ss') }}</div>
-          </template>
-          <template v-slot:item.action="{ item }">
-            <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="+" column-name="quantity" />
-            <v-menu offset-y close-on-content-click>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  v-on="on"
-                  icon
-                  color="cyan"
-                  dark
-                >
-                  <v-icon>
-                    mdi-tools
+        </template>
+        <!--        Ending column chapter or episode-->
+        <template v-slot:item.updated_at="{ item }">
+          <div>{{ $moment.utc(item.updated_at).local().format('YYYY-MM-DD HH:mm:ss') }}</div>
+        </template>
+        <template v-slot:item.action="{ item }">
+          <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="+" column-name="quantity" />
+          <v-menu offset-y close-on-content-click>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                v-on="on"
+                icon
+                color="cyan"
+                dark
+              >
+                <v-icon>
+                  mdi-tools
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="-" column-name="quantity" />
+              <DeleteDialog :item="item" @deleteItem="deleteItem" />
+              <v-list-item @click="googleItem(item)">
+                <v-list-item-icon>
+                  <v-icon
+                    class="mr-2"
+                    color="blue"
+                    size="25px"
+                  >
+                    mdi-google
                   </v-icon>
-                </v-btn>
-              </template>
-              <v-list>
-                <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="-" column-name="quantity" />
-                <DeleteDialog :item="item" @deleteItem="deleteItem" />
-                <v-list-item @click="googleItem(item)">
-                  <v-list-item-icon>
-                    <v-icon
-                      class="mr-2"
-                      color="blue"
-                      size="25px"
-                    >
-                      mdi-google
-                    </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>Google</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item @click="copyItem(item)">
-                  <v-list-item-icon>
-                    <v-icon
-                      class="mr-2"
-                      color="green"
-                      size="25px"
-                    >
-                      mdi-content-copy
-                    </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>Copy</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-          </template>
-        </v-data-table>
-        <div class="text-center">
-          <v-pagination v-model="options.page" :length="pageCount" :total-visible="7" />
-        </div>
-        <!--      Ending datatable-->
-      </client-only>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Google</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="copyItem(item)">
+                <v-list-item-icon>
+                  <v-icon
+                    class="mr-2"
+                    color="green"
+                    size="25px"
+                  >
+                    mdi-content-copy
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Copy</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+      </v-data-table>
+      <div class="text-center">
+        <v-pagination v-model="options.page" :length="pageCount" :total-visible="7" />
+      </div>
+      <!--      Ending datatable-->
     </v-card>
   </div>
 </template>
