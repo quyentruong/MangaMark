@@ -3,7 +3,7 @@ import { meta } from './utils/meta'
 require('dotenv').config()
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   router: {
     middleware: ['auth']
   },
