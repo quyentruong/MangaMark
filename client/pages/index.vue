@@ -35,7 +35,14 @@
         :options.sync="options"
         @page-count="pageCount = $event"
         hide-default-footer
+        show-expand
+        single-expand
       >
+        <template v-slot:top>
+          <v-btn @click="editable = true">
+            Turn on editable other name
+          </v-btn>
+        </template>
         <!--        :footer-props="{-->
         <!--          showFirstLastPage: true,-->
         <!--          showCurrentPage: true,-->
@@ -74,7 +81,7 @@
             <v-list>
               <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="-" column-name="quantity" />
               <DeleteDialog :item="item" @deleteItem="deleteItem" />
-              <v-list-item @click="googleItem(item)">
+              <v-list-item @click="googleItem(item.name, item.season, item.quantity)">
                 <v-list-item-icon>
                   <v-icon
                     class="mr-2"
@@ -85,10 +92,24 @@
                   </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>Google</v-list-item-title>
+                  <v-list-item-title>Google Name</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item @click="copyItem(item)">
+              <v-list-item @click="googleItem(item.other_name, item.season, item.quantity)" v-if="item.other_name !== null">
+                <v-list-item-icon>
+                  <v-icon
+                    class="mr-2"
+                    color="blue"
+                    size="25px"
+                  >
+                    mdi-google
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Google Other name</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="copyItem(item.name)">
                 <v-list-item-icon>
                   <v-icon
                     class="mr-2"
@@ -99,11 +120,41 @@
                   </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>Copy</v-list-item-title>
+                  <v-list-item-title>Copy Name</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="copyItem(item.other_name)" v-if="item.other_name !== null">
+                <v-list-item-icon>
+                  <v-icon
+                    class="mr-2"
+                    color="green"
+                    size="25px"
+                  >
+                    mdi-content-copy
+                  </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Copy Other Name</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-menu>
+        </template>
+        <template v-slot:item.data-table-expand="{ item, expand, isExpanded }">
+          <v-icon @click="expand(!isExpanded)" v-if="!item.season && (item.other_name !== null || editable)">
+            mdi-chevron-down
+          </v-icon>
+        </template>
+        <template v-slot:expanded-item="props">
+          <td :colspan="props.headers.length">
+            <ModifyCell
+              :cell="props"
+              :class="oldRead(props)"
+              @modifyItem="modifyChild"
+              :enabled="enabled"
+              column-name="other_name"
+            />
+          </td>
         </template>
       </v-data-table>
       <div class="text-center">
@@ -124,6 +175,7 @@ export default {
   auth: false,
   data () {
     return {
+      editable: false,
       options: {},
       pageCount: 0,
       search: '',
@@ -189,16 +241,16 @@ export default {
       })
     },
 
-    googleItem (item) {
-      let url = encodeURI(`https://www.google.com/search?q=${item.name} season ${parseInt(item.season)} episode ${parseInt(item.quantity) + 1}`)
+    googleItem (name, season, quantity) {
+      let url = encodeURI(`https://www.google.com/search?q=${name} season ${parseInt(season)} episode ${parseInt(quantity) + 1}`)
       if (this.enabled === 'Manga') {
-        url = encodeURI(`https://www.google.com/search?q=${item.name} chapter ${parseInt(item.quantity) + 1}`)
+        url = encodeURI(`https://www.google.com/search?q=${name} chapter ${parseInt(quantity) + 1}`)
       }
       window.open(url, '_blank')
     },
-    copyItem (item) {
-      this.$copyText(item.name).then((e) => {
-        this.$store.dispatch('setSnackbar', { color: 'info', text: `Copied ${item.name}` })
+    copyItem (name) {
+      this.$copyText(name).then((e) => {
+        this.$store.dispatch('setSnackbar', { color: 'info', text: `Copied ${name}` })
       }, (e) => {
         this.$store.dispatch('setSnackbar', { color: 'error', text: 'Can not copy' })
       })

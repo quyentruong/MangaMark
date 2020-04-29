@@ -29,6 +29,12 @@ class MangaRequest extends FormRequest
                 'name' => 'required|unique:mangas,name,NULL,id,user_id,'.$this->user_id
             ];
         }
+        if (strcmp($this->get('action'), 'other_name') === 0){
+            return [
+                'user_id' => 'required|numeric',
+                'other_name' => 'nullable|unique:mangas,other_name,NULL,id,user_id,'.$this->user_id
+            ];
+        }
         if (strcmp($this->get('action'), 'number') === 0){
             return [
                 'user_id' => 'required|numeric',

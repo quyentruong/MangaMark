@@ -16,7 +16,7 @@ class CreateMangasTable extends Migration
         Schema::create('mangas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('quantity');
             $table->timestamps();
             $table->unique(['user_id', 'name']);

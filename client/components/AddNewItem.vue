@@ -82,6 +82,7 @@ export default {
         name: '',
         quantity: 1,
         season: 1,
+        other_name: '',
         user_id: this.$auth.user.id
       }
     },

@@ -12,7 +12,7 @@ class Manga extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'quantity'
+        'name', 'other_name', 'quantity'
     ];
 
     public function user()

@@ -6,11 +6,15 @@
     @open="open"
     large
   >
-    <span :class="[columnName === 'name' ? 'itemName': '', oldRead()]">{{ compressTitle(cell.item[columnName]) }}</span>
+    <span v-if="columnName=== 'name'" :class="[columnName === 'name' ? 'itemName': '', oldRead()]">{{ compressTitle(cell.item[columnName]) }}</span>
+    <template v-if="columnName=== 'other_name'">
+      <v-text-field v-if="cell.item[columnName] === null" readonly placeholder="Add other name" />
+      <span :class="[columnName === 'name' ? 'itemName': '', oldRead()]" v-else>{{ cell.item[columnName] }}</span>
+    </template>
     <template v-slot:input>
       <v-text-field
         v-model="cell.item[columnName]"
-        :type="columnName==='name'?'text':'number'"
+        :type="columnName==='name' || columnName==='other_name'?'text':'number'"
         label="Edit"
         single-line
         counter
@@ -54,8 +58,12 @@ export default {
         if (this.$vuetify.breakpoint.name === 'md') {
           maxLength = 61 - lastWordLength
         }
-        if (this.enabled !== 'Manga') { maxLength -= 12 }
-        if (title.length > maxLength) { return title.substr(0, maxLength).trim() + '+' }
+        if (this.enabled !== 'Manga') {
+          maxLength -= 12
+        }
+        if (title.length > maxLength) {
+          return title.substr(0, maxLength).trim() + '+'
+        }
       }
       return title
     },
@@ -71,7 +79,7 @@ export default {
     },
     save (action) {
       const item = action
-      item.action = this.columnName === 'name' ? 'name' : 'number'
+      item.action = this.columnName === 'name' ? 'name' : this.columnName === 'other_name' ? 'other_name' : 'number'
 
       this.$axios.$put(`category/${this.enabled.toLowerCase()}/${item.id}`, item).then(() => {
         this.$store.dispatch('setSnackbar', { text: item.name + ' updated' })
@@ -100,12 +108,14 @@ export default {
       font-size: 17px;
     }
   }
+
   @media only screen and (min-width: 960px) {
     .itemName {
       font-family: 'Be Vietnam', sans-serif;
       font-size: 26px;
     }
   }
+
   .old {
     text-decoration: line-through;
   }
