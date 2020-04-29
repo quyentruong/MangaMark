@@ -49,17 +49,19 @@ export default {
     compressTitle (title) {
       if (typeof title === 'string' && (this.$vuetify.breakpoint.name === 'sm' || this.$vuetify.breakpoint.name === 'md')) {
         const words = title.split(' ')
-        const lastWordLength = words.pop().length
-        const secondLastWordLength = words.pop().length
-        const thirdLastWordLength = words.pop().length
+        const lastWordLength = words.length > 0 ? words.pop().length : 0
+        const secondLastWordLength = words.length > 0 ? words.pop().length : 0
+        const thirdLastWordLength = words.length > 0 ? words.pop().length : 0
         let maxLength = title.length
 
         if (this.$vuetify.breakpoint.name === 'sm') {
-          maxLength = 32 - lastWordLength - secondLastWordLength - thirdLastWordLength
+          maxLength = 25 - lastWordLength - secondLastWordLength - thirdLastWordLength
+          if (maxLength < 0) { maxLength = 25 - lastWordLength - secondLastWordLength }
         }
 
         if (this.$vuetify.breakpoint.name === 'md') {
-          maxLength = 61 - lastWordLength - secondLastWordLength
+          maxLength = 50 - lastWordLength - secondLastWordLength - thirdLastWordLength
+          if (maxLength < 0) { maxLength = 50 - lastWordLength - secondLastWordLength }
         }
         if (this.enabled !== 'Manga') {
           maxLength -= 12
