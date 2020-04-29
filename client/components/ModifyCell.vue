@@ -63,9 +63,6 @@ export default {
           maxLength = 50 - lastWordLength - secondLastWordLength - thirdLastWordLength
           if (maxLength < 0) { maxLength = 50 - lastWordLength - secondLastWordLength }
         }
-        if (this.enabled !== 'Manga') {
-          maxLength -= 12
-        }
         if (title.length > maxLength) {
           return title.substr(0, maxLength).trim() + '+'
         }
