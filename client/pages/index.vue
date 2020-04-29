@@ -29,6 +29,7 @@
       </v-card-title>
       <!--      Starting datatable-->
       <v-data-table
+        :custom-filter="customFilter"
         :headers="headersSlot[enabled]"
         :items="items"
         :search="search"
@@ -221,6 +222,30 @@ export default {
     this.options = this.$warehouse.get(`options_${this.enabled}`, {})
   },
   methods: {
+    customFilter (value, search, items) {
+      // eslint-disable-next-line camelcase
+      const { name, quantity, season, other_name } = items
+      // delete items.updated_at
+      // delete items.created_at
+      // delete items.user_id
+      // delete items.id
+      /*
+      Filter for individual words in search string. Filters
+      all object values rather than just the keys included
+      in the data table headers.
+       */
+      const wordArray = search
+        .toString()
+        .toLowerCase()
+        .split(' ')
+        .filter(x => x)
+      return wordArray.every(word =>
+        JSON.stringify(Object.values({ name, quantity, season, other_name }))
+          .toString()
+          .toLowerCase()
+          .includes(word)
+      )
+    },
     oldRead (props) {
       // console.log(props)
     },
