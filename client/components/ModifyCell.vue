@@ -48,15 +48,18 @@ export default {
   methods: {
     compressTitle (title) {
       if (typeof title === 'string' && (this.$vuetify.breakpoint.name === 'sm' || this.$vuetify.breakpoint.name === 'md')) {
-        const lastWordLength = title.split(' ').pop().length
+        const words = title.split(' ')
+        const lastWordLength = words.pop().length
+        const secondLastWordLength = words.pop().length
+        const thirdLastWordLength = words.pop().length
         let maxLength = title.length
 
         if (this.$vuetify.breakpoint.name === 'sm') {
-          maxLength = 32 - lastWordLength
+          maxLength = 32 - lastWordLength - secondLastWordLength - thirdLastWordLength
         }
 
         if (this.$vuetify.breakpoint.name === 'md') {
-          maxLength = 61 - lastWordLength
+          maxLength = 61 - lastWordLength - secondLastWordLength
         }
         if (this.enabled !== 'Manga') {
           maxLength -= 12
