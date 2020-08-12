@@ -45,6 +45,7 @@ export default {
     }
   },
   created () {
+    this.$emit('turnOffEdit')
     this.value = this.$store.state.headersSlot[this.enabled]
     this.$store.commit('setArrayHeader', { slot: this.enabled, array: this.value })
   }

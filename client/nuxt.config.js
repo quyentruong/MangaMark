@@ -136,6 +136,14 @@ export default {
       login: '/guest/login',
       logout: '/guest/login',
       home: '/'
+    },
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        sameSite: true,
+        secure: true
+      }
     }
   },
   /*

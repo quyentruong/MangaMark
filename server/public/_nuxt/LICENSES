@@ -1,5 +1,5 @@
 /*!
-  * vue-router v3.1.6
+  * vue-router v3.4.3
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -41,3 +41,5 @@
  * (c) 2019 Evan You
  * @license MIT
  */
+
+//! moment.js

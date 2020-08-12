@@ -35,12 +35,12 @@
         :search="search"
         :options.sync="options"
         @page-count="pageCount = $event"
+        :show-expand="showExpand"
         hide-default-footer
-        show-expand
         single-expand
       >
         <template v-slot:top>
-          <v-btn @click="editable = true">
+          <v-btn @click="editable = !editable">
             Turn on editable other name
           </v-btn>
         </template>
@@ -142,11 +142,11 @@
           </v-menu>
         </template>
         <template v-slot:item.data-table-expand="{ item, expand, isExpanded }">
-          <v-icon @click="expand(!isExpanded)" v-if="!item.season && (item.other_name !== null || editable)">
+          <v-icon @click="expandFunc(expand, !isExpanded)" v-if="!item.season && (item.other_name !== null || editable)">
             mdi-chevron-down
           </v-icon>
         </template>
-        <template v-slot:expanded-item="props">
+        <template v-slot:expanded-item="props" v-if="selectExpand">
           <td :colspan="props.headers.length">
             <ModifyCell
               :cell="props"
@@ -176,6 +176,8 @@ export default {
   auth: false,
   data () {
     return {
+      selectExpand: false,
+      showExpand: true,
       editable: false,
       options: {},
       pageCount: 0,
@@ -202,6 +204,8 @@ export default {
       deep: true
     },
     enabled (slot) {
+      this.showExpand = slot === 'Manga'
+      this.selectExpand = false
       this.$warehouse.set('slot', slot)
       this.$store.commit('setArrayHeader', { slot, array: this.headersSlot[slot] })
       this.fetchItem()
@@ -217,6 +221,7 @@ export default {
   },
   created () {
     this.headersSlot = this.$store.state.headersSlot
+    this.showExpand = this.enabled === 'Manga'
     // this.enabled = this.$warehouse.get('slot', 'Manga')
     // this.fetchItem()
     this.options = this.$warehouse.get(`options_${this.enabled}`, {})
@@ -224,7 +229,7 @@ export default {
   methods: {
     customFilter (value, search, items) {
       // eslint-disable-next-line camelcase
-      const { name, quantity, season, other_name } = items
+      const { name, quantity, season, other_name, updated_at } = items
       // delete items.updated_at
       // delete items.created_at
       // delete items.user_id
@@ -240,17 +245,22 @@ export default {
         .split(' ')
         .filter(x => x)
       return wordArray.every(word =>
-        JSON.stringify(Object.values({ name, quantity, season, other_name }))
+        JSON.stringify(Object.values({ name, quantity, season, other_name, updated_at }))
           .toString()
           .toLowerCase()
           .includes(word)
       )
+    },
+    expandFunc (expand, isExpanded) {
+      expand(isExpanded)
+      this.selectExpand = true
     },
     oldRead (props) {
       // console.log(props)
     },
     modifyChild () {
       this.fetchItem()
+      this.search = ''
     },
     async fetchItem () {
       const { data } = await this.$axios.$get(`category/${this.enabled.toLowerCase()}/`)

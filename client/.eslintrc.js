@@ -13,5 +13,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    "template-curly-spacing" : "off",
+    indent : "off"
   }
 }
