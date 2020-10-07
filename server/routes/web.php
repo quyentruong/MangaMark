@@ -18,6 +18,10 @@
 //    ];
 //});
 
+use App\Exports\MangasExport;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 Route::get('/', 'FrontEndController@index')->name('frontend.index');
 Route::get('/profile', 'FrontEndController@profile')->name('frontend.profile');
 Route::get('/guest/login', 'FrontEndController@login')->name('frontend.login');
@@ -25,6 +29,9 @@ Route::get('/guest/register', 'FrontEndController@register')->name('frontend.reg
 Route::get('/guest/forgot-password', 'FrontEndController@forgot_password')->name('frontend.forgot_password');
 Route::get('/guest/reset-password', 'FrontEndController@reset_password')->name('frontend.reset_password');
 Route::get('/guest/verify', 'FrontEndController@verify')->name('frontend.verify');
+//Route::get('/download/', function (){
+//    return Excel::download(new MangasExport(1), 'manga.xlsx');
+//});
 
 // SPA
 //Route::get(

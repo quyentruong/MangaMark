@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FrontEndController extends Controller
 {
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
     public function login() {
         return view('guest.login');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Category;
 
+use App\Exports\MangasExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\MangaRequest;
 use App\Manga;
@@ -10,9 +11,16 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MangaController extends Controller
 {
+    public function export(Request $request)
+    {
+        return Excel::raw(new MangasExport($request->user()->id), \Maatwebsite\Excel\Excel::XLSX);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -96,6 +104,6 @@ class MangaController extends Controller
     public function destroy(Manga $manga)
     {
         $manga->delete();
-        return response()->json(null,204);
+        return response()->json(null, 204);
     }
 }

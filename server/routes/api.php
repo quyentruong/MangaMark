@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 //        'version' => '1.0.0',
 //    ];
 //});
-
+//Route::get('/users/export/', 'FrontEndController@export');
 Route::group(['namespace' => 'Auth'], function () {
 
     Route::post('auth/login', ['as' => 'login', 'uses' => 'AuthController@login']);
@@ -47,6 +47,8 @@ Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
         Route::resource('category/tvshow', 'TVShowController', [
             'only' => ['index', 'store', 'update', 'destroy']
         ]);
+        Route::get('export/manga', ['as' => 'manga.export', 'uses' => 'MangaController@export']);
+        Route::get('export/anime', ['as' => 'anime.export', 'uses' => 'AnimeController@export']);
     });
 
     Route::group(['namespace' => 'Profile'], function () {

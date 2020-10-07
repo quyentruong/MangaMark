@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -33,7 +34,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -44,8 +45,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -64,16 +65,21 @@ class Handler extends ExceptionHandler
                 'error' => 'You are not allowed to do this action.',
                 'status_code' => 403
             ];
-        }
-        else {
-            // Default to vague error to avoid revealing sensitive information
-            return parent::render($request, $exception);
+        } elseif ($exception instanceof NotFoundHttpException) {
 //            $json = [
-//                'error' => (app()->environment() !== 'production')
-//                    ? $exception->getMessage()
-//                    : 'An error has occurred.',
-//                'status_code' => $exception->getCode()
+//                'error' => 'Sorry, the page you are looking for could not be found.',
+//                'status_code' => 403
 //            ];
+            return parent::render($request, $exception);
+        } else {
+            // Default to vague error to avoid revealing sensitive information
+
+            $json = [
+                'error' => (app()->environment() !== 'production')
+                    ? $exception->getMessage()
+                    : 'An error has occurred.',
+                'status_code' => $exception->getCode()
+            ];
         }
 
         return response()->json($json, $rendered->getStatusCode());

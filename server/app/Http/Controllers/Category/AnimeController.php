@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Category;
 
 use App\Anime;
+use App\Exports\AnimesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\AnimeRequest;
 use App\User;
@@ -10,9 +11,14 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AnimeController extends Controller
 {
+    public function export(Request $request)
+    {
+        return Excel::raw(new AnimesExport($request->user()->id), \Maatwebsite\Excel\Excel::XLSX);
+    }
     /**
      * Display a listing of the resource.
      *
