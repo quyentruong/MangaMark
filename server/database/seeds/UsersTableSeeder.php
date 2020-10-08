@@ -16,12 +16,14 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->truncate();
         DB::table('users')->insert([
             'name' => Str::random(10),
-            'email' => 'admin'.'@admin.com',
+            'email' => 'admin' . '@admin.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ]);
         DB::table('users')->insert([
             'name' => Str::random(10),
-            'email' => 'user'.'@user.com',
+            'email' => 'user' . '@user.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('password'),
         ]);
 //        factory(User::class,5)->create();

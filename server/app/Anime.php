@@ -12,7 +12,7 @@ class Anime extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'season', 'quantity'
+        'name', 'season', 'quantity', 'created_at', 'updated_at'
     ];
 
     public function user()

@@ -167,10 +167,10 @@
 </template>
 
 <script>
-import AddNewItem from '../components/AddNewItem'
-import ModifyCell from '../components/ModifyCell'
-import AddDecreaseNumber from '../components/AddDecreaseNumber'
-import DeleteDialog from '../components/DeleteDialog'
+import AddNewItem from '../components/Index/AddNewItem'
+import ModifyCell from '../components/Index/ModifyCell'
+import AddDecreaseNumber from '../components/Index/AddDecreaseNumber'
+import DeleteDialog from '../components/Index/DeleteDialog'
 export default {
   components: { DeleteDialog, AddDecreaseNumber, ModifyCell, AddNewItem },
   auth: false,

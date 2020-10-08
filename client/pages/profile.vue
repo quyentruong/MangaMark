@@ -74,34 +74,13 @@
           </v-btn>
         </v-col>
         <v-col>
-          <v-menu offset-y close-on-content-click>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                v-on="on"
-                color="primary"
-              >
-                Export
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="manga_export">
-                <v-list-item-icon>
-                  <v-icon>mdi-book-open</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>Manga</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item @click="anime_export">
-                <v-list-item-icon>
-                  <v-icon>mdi-youtube-tv</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>Anime</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <Import />
+        </v-col>
+        <v-col>
+          <Export />
+        </v-col>
+        <v-col>
+          <Delete />
         </v-col>
         <v-col offset-md="6" offset-lg="8" offset-xl="8">
           <PasswordForm />
@@ -113,12 +92,18 @@
 
 <script>
 import { mapFields } from 'vuex-map-fields'
-import PasswordForm from '../components/PasswordForm'
+import PasswordForm from '../components/Profile/PasswordForm'
 import validations from '@/utils/validations'
+import Export from '@/components/Profile/Export'
+import Import from '@/components/Profile/Import'
+import Delete from '@/components/Profile/Delete'
+
 export default {
   name: 'Profile',
-  components: { PasswordForm },
+  components: { Delete, Import, Export, PasswordForm },
   data: () => ({
+    mangaFile: new File([''], 'Manga'),
+    animeFile: new File([''], 'Anime'),
     modelstate: {},
     ...validations
   }),
@@ -137,30 +122,6 @@ export default {
     })
   },
   methods: {
-    async manga_export () {
-      await this.$axios.$get('export/manga', { responseType: 'blob' }).then((response) => {
-        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-        const e = document.createEvent('MouseEvents')
-          const a = document.createElement('a')
-        a.download = `manga_id_${this.$auth.user.id}.xlsx`
-        a.href = window.URL.createObjectURL(blob)
-        a.dataset.downloadurl = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', a.download, a.href].join(':')
-        e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-        a.dispatchEvent(e)
-      })
-    },
-    async anime_export () {
-      await this.$axios.$get('export/anime', { responseType: 'blob' }).then((response) => {
-        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-        const e = document.createEvent('MouseEvents')
-        const a = document.createElement('a')
-        a.download = `anime_id_${this.$auth.user.id}.xlsx`
-        a.href = window.URL.createObjectURL(blob)
-        a.dataset.downloadurl = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', a.download, a.href].join(':')
-        e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-        a.dispatchEvent(e)
-      })
-    },
     async change () {
       if (this.$refs.form.validate()) {
         this.modelstate = {}

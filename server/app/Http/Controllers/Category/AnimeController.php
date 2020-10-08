@@ -6,6 +6,7 @@ use App\Anime;
 use App\Exports\AnimesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\AnimeRequest;
+use App\Imports\AnimesImport;
 use App\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -15,9 +16,19 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AnimeController extends Controller
 {
-    public function export(Request $request)
+    public function import(Request $request)
     {
-        return Excel::raw(new AnimesExport($request->user()->id), \Maatwebsite\Excel\Excel::XLSX);
+        $request->validate([
+            'id' => 'required',
+            'xlsx' => 'required|mimes:xlsx'
+        ]);
+        Excel::import(new AnimesImport($request->id), $request->xlsx);
+        return response()->json(null, 201);
+    }
+
+    public function export($user_id)
+    {
+        return Excel::raw(new AnimesExport($user_id), \Maatwebsite\Excel\Excel::XLSX);
     }
     /**
      * Display a listing of the resource.

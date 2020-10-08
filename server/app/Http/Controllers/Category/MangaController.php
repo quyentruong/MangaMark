@@ -5,20 +5,34 @@ namespace App\Http\Controllers\Category;
 use App\Exports\MangasExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\MangaRequest;
+use App\Imports\MangasImport;
 use App\Manga;
 use App\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MangaController extends Controller
 {
-    public function export(Request $request)
+    public function delete_all($user_id) {
+        User::find($user_id)->mangas()->delete();
+        return response()->json(null, 204);
+    }
+    public function import(Request $request)
     {
-        return Excel::raw(new MangasExport($request->user()->id), \Maatwebsite\Excel\Excel::XLSX);
+        $request->validate([
+            'id' => 'required',
+            'xlsx' => 'required|mimes:xlsx'
+        ]);
+        Excel::import(new MangasImport($request->id), $request->xlsx);
+        return response()->json(null, 201);
+    }
+
+    public function export($user_id)
+    {
+        return Excel::raw(new MangasExport($user_id), \Maatwebsite\Excel\Excel::XLSX);
     }
 
     /**

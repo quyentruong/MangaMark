@@ -47,8 +47,12 @@ Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
         Route::resource('category/tvshow', 'TVShowController', [
             'only' => ['index', 'store', 'update', 'destroy']
         ]);
-        Route::get('export/manga', ['as' => 'manga.export', 'uses' => 'MangaController@export']);
-        Route::get('export/anime', ['as' => 'anime.export', 'uses' => 'AnimeController@export']);
+        Route::get('export/manga/{user_id}', ['as' => 'manga.export', 'uses' => 'MangaController@export']);
+        Route::get('export/anime/{user_id}', ['as' => 'anime.export', 'uses' => 'AnimeController@export']);
+        Route::post('import/manga', ['as' => 'manga.import', 'uses' => 'MangaController@import']);
+        Route::post('import/anime', ['as' => 'anime.import', 'uses' => 'AnimeController@import']);
+        Route::delete('delete/manga/{user_id}', ['as' => 'manga.deleteAll', 'uses' => 'MangaController@delete_all']);
+        Route::delete('delete/anime/{user_id}', ['as' => 'anime.deleteAll', 'uses' => 'AnimeController@delete_all']);
     });
 
     Route::group(['namespace' => 'Profile'], function () {

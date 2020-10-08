@@ -1,12 +1,12 @@
 import colors from 'vuetify/es5/util/colors'
 import { meta } from './utils/meta'
-require('dotenv').config()
 
 export default {
   ssr: false,
   router: {
     middleware: ['auth']
   },
+  publicRuntimeConfig: {},
   manifest: {
     crossorigin: 'use-credentials',
     runtimeCaching: [
@@ -49,7 +49,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    'plugins/nuxt-client-clipboard2'
+    'plugins/nuxt-client-clipboard2',
+    'plugins/nuxt-client-dialog',
+    'plugins/nuxt-client-capitalize'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -68,7 +70,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
-    '@nuxtjs/dotenv',
     '@nuxtjs/recaptcha',
     ['vue-warehouse/nuxt', {
       vuex: true
@@ -90,6 +91,10 @@ export default {
     }
   },
   pwa: {
+    icon: {
+      'source': '/favicon.png',
+      'fileName': 'favicon.png'
+    },
     manifest: {
       'icons': [{
         'src': '/favicon.png',
