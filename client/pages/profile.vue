@@ -64,6 +64,24 @@
           prepend-icon="mdi-calendar"
           disabled
         />
+        <v-row>
+          <v-col>
+            <v-text-field
+              v-model="api_key"
+              label="API Key"
+              prepend-icon="mdi-key"
+              disabled
+            />
+          </v-col>
+          <v-col>
+            <v-btn @click="generateKey">
+              Generate
+            </v-btn>
+            <v-btn @click="copyKey">
+              Copy
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-form>
     </v-card-text>
     <v-card-actions>
@@ -82,7 +100,7 @@
         <v-col>
           <Delete />
         </v-col>
-        <v-col offset-md="6" offset-lg="8" offset-xl="8">
+        <v-col>
           <PasswordForm />
         </v-col>
       </v-row>
@@ -102,6 +120,7 @@ export default {
   name: 'Profile',
   components: { Delete, Import, Export, PasswordForm },
   data: () => ({
+    api_key: '',
     mangaFile: new File([''], 'Manga'),
     animeFile: new File([''], 'Anime'),
     modelstate: {},
@@ -121,7 +140,23 @@ export default {
       userEmail: 'auth.user.email'
     })
   },
+  created () {
+    this.api_key = this.$auth.user.api_key
+  },
   methods: {
+    async generateKey () {
+      await this.$axios.$put('generateapi', this.$auth.user).then((res) => {
+        this.$store.dispatch('setSnackbar', { text: 'Generated API Key' })
+        this.api_key = res.data.api_key
+      })
+    },
+    copyKey () {
+      this.$copyText(this.api_key).then((e) => {
+        this.$store.dispatch('setSnackbar', { color: 'info', text: `Copied ${this.api_key}` })
+      }, (e) => {
+        this.$store.dispatch('setSnackbar', { color: 'error', text: 'Can not copy' })
+      })
+    },
     async change () {
       if (this.$refs.form.validate()) {
         this.modelstate = {}

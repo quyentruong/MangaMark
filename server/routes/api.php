@@ -70,8 +70,7 @@ Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
         Route::post('logout', ['as' => 'logout', 'uses' => 'LogoutController@logout']);
 
     });
-
+    Route::put('generateapi', ['as' => 'api.manga.generate', 'uses' => 'ApiKeyController@generateApiKey']);
 });
-
-
-
+Route::get('getinfomanga', ['as' => 'api.manga.getinfo', 'uses' => 'ApiKeyController@getInfoManga']);
+Route::put('updatemanga', ['as' => 'api.manga.update', 'uses' => 'ApiKeyController@updateManga']);
