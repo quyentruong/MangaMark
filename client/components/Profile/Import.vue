@@ -45,6 +45,24 @@
           />
         </v-list-item-action>
       </v-list-item>
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon>mdi-television</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>TVShow</v-list-item-title>
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-file-input
+            v-model="collection_file"
+            @change="collection_import('tvshow')"
+            :clearable="false"
+            hide-input
+            prepend-icon="mdi-upload"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          />
+        </v-list-item-action>
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>

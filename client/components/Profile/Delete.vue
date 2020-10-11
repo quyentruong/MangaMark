@@ -25,6 +25,14 @@
           <v-list-item-title>Anime</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      <v-list-item @click="collection_delete('tvshow')">
+        <v-list-item-icon>
+          <v-icon>mdi-television</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>TVShow</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>

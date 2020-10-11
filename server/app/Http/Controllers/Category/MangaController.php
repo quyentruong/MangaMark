@@ -52,7 +52,7 @@ class MangaController extends Controller
 //            $result[] = [
 //                'id' => $manga->id,
 //                'user_id' => $manga->user_id,
-//                'names' => $manga->names()->get('name'),
+//                'name' => $manga->name,
 //                'quantity' => $manga->quantity,
 //                'created_at' => $manga->created_at,
 //                'updated_at' => $manga->updated_at

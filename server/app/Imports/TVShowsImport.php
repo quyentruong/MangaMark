@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class AnimesImport implements ToCollection, WithHeadingRow
+class TVShowsImport implements ToCollection, WithHeadingRow
 {
     protected $id;
 
@@ -20,8 +20,8 @@ class AnimesImport implements ToCollection, WithHeadingRow
     {
         $user = User::find($this->id);
         foreach ($rows as $row) {
-            if ($user->animes()->where('name', $row['name'])->first() === null) {
-                $user->animes()->create([
+            if ($user->tvshows()->where('name', $row['name'])->first() === null) {
+                $user->tvshows()->create([
                     'name' => $row['name'],
                     'other_name_1' => $row['other_name_1'],
                     'other_name_2' => $row['other_name_2'],

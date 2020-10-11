@@ -99,7 +99,7 @@
                   <v-list-item-title>Copy Name</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <OtherName v-if="enabled==='Manga'" :cell="item" @modifyItem="modifyChild" @copyItem="copyItem" @googleItem="googleItem" />
+              <OtherName :enabled="enabled" :cell="item" @modifyItem="modifyChild" @copyItem="copyItem" @googleItem="googleItem" />
             </v-list>
           </v-menu>
         </template>
@@ -224,9 +224,9 @@ export default {
     },
 
     googleItem (name, season, quantity) {
-      let url = encodeURI(`https://www.google.com/search?q=${name} season ${parseInt(season)} episode ${parseInt(quantity) + 1}`)
+      let url = encodeURI(`https://www.google.com/search?q=${name} season ${parseInt(season)} episode ${parseFloat(quantity) + 1}`)
       if (this.enabled === 'Manga') {
-        url = encodeURI(`https://www.google.com/search?q=${name} chapter ${parseInt(quantity) + 1}`)
+        url = encodeURI(`https://www.google.com/search?q=${name} chapter ${parseFloat(quantity) + 1}`)
       }
       window.open(url, '_blank')
     },

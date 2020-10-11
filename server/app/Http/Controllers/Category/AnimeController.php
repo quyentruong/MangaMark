@@ -16,6 +16,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AnimeController extends Controller
 {
+    public function delete_all($user_id)
+    {
+        User::find($user_id)->animes()->delete();
+        return response()->json(null, 204);
+    }
+
     public function import(Request $request)
     {
         $request->validate([

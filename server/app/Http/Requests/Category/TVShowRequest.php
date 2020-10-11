@@ -30,6 +30,11 @@ class TVShowRequest extends FormRequest
                 'name' => 'required|unique:t_v_shows,name,NULL,id,user_id,'.$this->user_id
             ];
         }
+        if (strcmp($this->get('action'), 'other_name') === 0) {
+            return [
+                'user_id' => 'required|numeric'
+            ];
+        }
         if (strcmp($this->get('action'), 'number') === 0){
             return [
                 'user_id' => 'required|numeric',

@@ -42,7 +42,7 @@
                   mdi-content-copy
                 </v-icon>
               </v-btn>
-              <v-btn @click="googleItem (cell.other_name_1, 0, cell.quantity)" icon>
+              <v-btn @click="googleItem (cell.other_name_1, cell.season, cell.quantity)" icon>
                 <v-icon
                   class="mr-2"
                   color="blue"
@@ -72,7 +72,7 @@
                   mdi-content-copy
                 </v-icon>
               </v-btn>
-              <v-btn @click="googleItem (cell.other_name_2, 0, cell.quantity)" icon>
+              <v-btn @click="googleItem (cell.other_name_2, cell.season, cell.quantity)" icon>
                 <v-icon
                   class="mr-2"
                   color="blue"
@@ -102,7 +102,7 @@
                   mdi-content-copy
                 </v-icon>
               </v-btn>
-              <v-btn @click="googleItem (cell.other_name_3, 0, cell.quantity)" icon>
+              <v-btn @click="googleItem (cell.other_name_3, cell.season, cell.quantity)" icon>
                 <v-icon
                   class="mr-2"
                   color="blue"
@@ -138,6 +138,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    enabled: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -147,7 +151,7 @@ export default {
   methods: {
     save () {
       this.cell.action = 'other_name'
-      this.$axios.$put(`category/manga/${this.cell.id}`, this.cell).then(() => {
+      this.$axios.$put(`category/${this.enabled.toLowerCase()}/${this.cell.id}`, this.cell).then(() => {
         this.dialog = false
         this.$store.dispatch('setSnackbar', { text: this.cell.name + ' updated' })
       }).catch((error) => {

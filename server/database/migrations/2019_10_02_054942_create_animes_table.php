@@ -15,10 +15,13 @@ class CreateAnimesTable extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->string('other_name_1')->nullable();
+            $table->string('other_name_2')->nullable();
+            $table->string('other_name_3')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->integer('season');
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->timestamps();
             $table->unique(['user_id', 'name'], 'anime_unique');
             $table->foreign('user_id', 'anime_foreign')->references('id')->on('users')->onDelete('cascade');

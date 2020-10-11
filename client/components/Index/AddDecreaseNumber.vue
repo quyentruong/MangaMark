@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     modifyQuantity (item, type, action) {
-      const temp = this.simplePlusMinus(parseInt(item[type]), 1, action)
+      const temp = this.simplePlusMinus(parseFloat(item[type]), 1, action)
       if (temp === -1) {
         this.$store.dispatch('setSnackbar', { color: 'error', text: 'The minimum is 1' })
         return

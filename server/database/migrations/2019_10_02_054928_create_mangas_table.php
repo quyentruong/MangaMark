@@ -20,9 +20,9 @@ class CreateMangasTable extends Migration
             $table->string('other_name_2')->nullable();
             $table->string('other_name_3')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->timestamps();
-            $table->unique(['user_id', 'name', 'other_name_1', 'other_name_2', 'other_name_3'], 'manga_unique');
+            $table->unique(['user_id', 'name'], 'manga_unique');
             $table->foreign('user_id', 'manga_foreign')->references('id')->on('users')->onDelete('cascade');
         });
     }

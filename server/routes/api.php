@@ -49,10 +49,13 @@ Route::group(['middleware' => ['jwt', 'jwt.auth']], function () {
         ]);
         Route::get('export/manga/{user_id}', ['as' => 'manga.export', 'uses' => 'MangaController@export']);
         Route::get('export/anime/{user_id}', ['as' => 'anime.export', 'uses' => 'AnimeController@export']);
+        Route::get('export/tvshow/{user_id}', ['as' => 'tvshow.export', 'uses' => 'TVShowController@export']);
         Route::post('import/manga', ['as' => 'manga.import', 'uses' => 'MangaController@import']);
         Route::post('import/anime', ['as' => 'anime.import', 'uses' => 'AnimeController@import']);
+        Route::post('import/tvshow', ['as' => 'tvshow.import', 'uses' => 'TVShowController@import']);
         Route::delete('delete/manga/{user_id}', ['as' => 'manga.deleteAll', 'uses' => 'MangaController@delete_all']);
         Route::delete('delete/anime/{user_id}', ['as' => 'anime.deleteAll', 'uses' => 'AnimeController@delete_all']);
+        Route::delete('delete/tvshow/{user_id}', ['as' => 'tvshow.deleteAll', 'uses' => 'TVShowController@delete_all']);
     });
 
     Route::group(['namespace' => 'Profile'], function () {

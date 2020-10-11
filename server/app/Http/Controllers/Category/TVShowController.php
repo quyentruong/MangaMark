@@ -2,17 +2,40 @@
 
 namespace App\Http\Controllers\Category;
 
+use App\Exports\TVShowsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\TVShowRequest;
+use App\Imports\TVShowsImport;
 use App\TVShow;
 use App\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TVShowController extends Controller
 {
+    public function delete_all($user_id)
+    {
+        User::find($user_id)->tvshows()->delete();
+        return response()->json(null, 204);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'xlsx' => 'required|mimes:xlsx'
+        ]);
+        Excel::import(new TVShowsImport($request->id), $request->xlsx);
+        return response()->json(null, 201);
+    }
+
+    public function export($user_id)
+    {
+        return Excel::raw(new TVShowsExport($user_id), \Maatwebsite\Excel\Excel::XLSX);
+    }
     /**
      * Display a listing of the resource.
      *

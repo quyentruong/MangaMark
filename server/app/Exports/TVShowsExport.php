@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AnimesExport implements FromCollection, WithHeadings, WithMapping, WithProperties, ShouldAutoSize
+class TVShowsExport implements FromCollection, WithHeadings, WithMapping, WithProperties, ShouldAutoSize
 {
     protected $id;
 
@@ -51,18 +51,18 @@ class AnimesExport implements FromCollection, WithHeadings, WithMapping, WithPro
      */
     public function collection()
     {
-        return User::find($this->id)->animes()->get();
+        return User::find($this->id)->tvshows()->get();
     }
 
     public function properties(): array
     {
         return [
             'lastModifiedBy' => User::find($this->id)->email,
-            'title'          => 'Anime data export',
-            'description'    => "Latest Anime data on " . date('l m/d/Y h:i:sa'),
-            'subject'        => 'Anime',
-            'keywords'       => 'anime,export,spreadsheet',
-            'category'       => 'Anime'
+            'title'          => 'TVShow data export',
+            'description'    => "Latest TVShow data on " . date('l m/d/Y h:i:sa'),
+            'subject'        => 'TVShow',
+            'keywords'       => 'tvshow,export,spreadsheet',
+            'category'       => 'TVShow'
         ];
     }
 }
