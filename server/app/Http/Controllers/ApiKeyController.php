@@ -17,7 +17,11 @@ class ApiKeyController extends Controller
         ]);
         if ($this->checkApi($request->user_id, $request->api) === false)
             return response()->json("Api Key incorrect", 500);
-        $manga = User::find($request->user_id)->mangas()->where('name', $request->manga_name)->first();
+        $manga = User::find($request->user_id)->mangas()->where('name', $request->manga_name)
+            ->orWhere('other_name_1',$request->manga_name)
+            ->orWhere('other_name_2',$request->manga_name)
+            ->orWhere('other_name_3',$request->manga_name)
+            ->first();
         if ($manga === null)
             return response()->json("This manga is not found", 404);
         return response()->json([
@@ -35,7 +39,11 @@ class ApiKeyController extends Controller
         ]);
         if ($this->checkApi($request->user_id, $request->api) === false)
             return response()->json("Api Key incorrect", 500);
-        $manga = User::find($request->user_id)->mangas()->where('name', $request->manga_name)->first();
+        $manga = User::find($request->user_id)->mangas()->where('name', $request->manga_name)
+            ->orWhere('other_name_1',$request->manga_name)
+            ->orWhere('other_name_2',$request->manga_name)
+            ->orWhere('other_name_3',$request->manga_name)
+            ->first();
         $manga->update([
             'quantity' => $request->chap_number
         ]);

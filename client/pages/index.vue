@@ -35,20 +35,9 @@
         :search="search"
         :options.sync="options"
         @page-count="pageCount = $event"
-        :show-expand="showExpand"
         hide-default-footer
         single-expand
       >
-        <template v-slot:top>
-          <v-btn @click="editable = !editable">
-            Turn on editable other name
-          </v-btn>
-        </template>
-        <!--        :footer-props="{-->
-        <!--          showFirstLastPage: true,-->
-        <!--          showCurrentPage: true,-->
-        <!--          disableItemsPerPage: true-->
-        <!--        }"-->
         <!--        Starting column name-->
         <template v-for="slot in $store.state.itemSlots" v-slot:[slot.name]="props">
           <ModifyCell
@@ -96,20 +85,6 @@
                   <v-list-item-title>Google Name</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item @click="googleItem(item.other_name, item.season, item.quantity)" v-if="item.other_name !== null">
-                <v-list-item-icon>
-                  <v-icon
-                    class="mr-2"
-                    color="blue"
-                    size="25px"
-                  >
-                    mdi-google
-                  </v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>Google Other name</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
               <v-list-item @click="copyItem(item.name)">
                 <v-list-item-icon>
                   <v-icon
@@ -124,38 +99,9 @@
                   <v-list-item-title>Copy Name</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item @click="copyItem(item.other_name)" v-if="item.other_name !== null">
-                <v-list-item-icon>
-                  <v-icon
-                    class="mr-2"
-                    color="green"
-                    size="25px"
-                  >
-                    mdi-content-copy
-                  </v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>Copy Other Name</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+              <OtherName v-if="enabled==='Manga'" :cell="item" @modifyItem="modifyChild" @copyItem="copyItem" @googleItem="googleItem" />
             </v-list>
           </v-menu>
-        </template>
-        <template v-slot:item.data-table-expand="{ item, expand, isExpanded }">
-          <v-icon @click="expandFunc(expand, !isExpanded)" v-if="!item.season && (item.other_name !== null || editable)">
-            mdi-chevron-down
-          </v-icon>
-        </template>
-        <template v-slot:expanded-item="props" v-if="selectExpand">
-          <td :colspan="props.headers.length">
-            <ModifyCell
-              :cell="props"
-              :class="oldRead(props)"
-              @modifyItem="modifyChild"
-              :enabled="enabled"
-              column-name="other_name"
-            />
-          </td>
         </template>
       </v-data-table>
       <div class="text-center">
@@ -171,8 +117,9 @@ import AddNewItem from '../components/Index/AddNewItem'
 import ModifyCell from '../components/Index/ModifyCell'
 import AddDecreaseNumber from '../components/Index/AddDecreaseNumber'
 import DeleteDialog from '../components/Index/DeleteDialog'
+import OtherName from '@/components/Index/OtherName'
 export default {
-  components: { DeleteDialog, AddDecreaseNumber, ModifyCell, AddNewItem },
+  components: { OtherName, DeleteDialog, AddDecreaseNumber, ModifyCell, AddNewItem },
   auth: false,
   data () {
     return {
@@ -229,7 +176,7 @@ export default {
   methods: {
     customFilter (value, search, items) {
       // eslint-disable-next-line camelcase
-      const { name, quantity, season, other_name, updated_at } = items
+      const { name, quantity, season, other_name_1, other_name_2, other_name_3, updated_at } = items
       // delete items.updated_at
       // delete items.created_at
       // delete items.user_id
@@ -245,7 +192,7 @@ export default {
         .split(' ')
         .filter(x => x)
       return wordArray.every(word =>
-        JSON.stringify(Object.values({ name, quantity, season, other_name, updated_at }))
+        JSON.stringify(Object.values({ name, quantity, season, other_name_1, other_name_2, other_name_3, updated_at }))
           .toString()
           .toLowerCase()
           .includes(word)
@@ -283,8 +230,9 @@ export default {
       }
       window.open(url, '_blank')
     },
-    copyItem (name) {
-      this.$copyText(name).then((e) => {
+    copyItem (name, container) {
+      // const container = this.$refs.container
+      this.$copyText(name, container).then((e) => {
         this.$store.dispatch('setSnackbar', { color: 'info', text: `Copied ${name}` })
       }, (e) => {
         this.$store.dispatch('setSnackbar', { color: 'error', text: 'Can not copy' })

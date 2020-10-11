@@ -15,12 +15,15 @@ class CreateMangasTable extends Migration
     {
         Schema::create('mangas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->string('other_name_1')->nullable();
+            $table->string('other_name_2')->nullable();
+            $table->string('other_name_3')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->integer('quantity');
             $table->timestamps();
-            $table->unique(['user_id', 'name']);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unique(['user_id', 'name', 'other_name_1', 'other_name_2', 'other_name_3'], 'manga_unique');
+            $table->foreign('user_id', 'manga_foreign')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

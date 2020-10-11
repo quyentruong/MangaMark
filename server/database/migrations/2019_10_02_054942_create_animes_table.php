@@ -20,8 +20,8 @@ class CreateAnimesTable extends Migration
             $table->integer('season');
             $table->integer('quantity');
             $table->timestamps();
-            $table->unique(['user_id', 'name']);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unique(['user_id', 'name'], 'anime_unique');
+            $table->foreign('user_id', 'anime_foreign')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

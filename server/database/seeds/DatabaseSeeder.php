@@ -17,9 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AnimesTableSeeder::class);
         $this->call(MangasTableSeeder::class);
         $this->call(TVShowSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-        $this->call(ConnectRelationshipsSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -12,14 +12,17 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MangaController extends Controller
 {
-    public function delete_all($user_id) {
+    public function delete_all($user_id)
+    {
         User::find($user_id)->mangas()->delete();
         return response()->json(null, 204);
     }
+
     public function import(Request $request)
     {
         $request->validate([
@@ -44,6 +47,17 @@ class MangaController extends Controller
     public function index(Request $request)
     {
         $mangas = User::find($request->user()->id)->mangas()->get();
+//        $result = array();
+//        foreach ($mangas as $manga) {
+//            $result[] = [
+//                'id' => $manga->id,
+//                'user_id' => $manga->user_id,
+//                'names' => $manga->names()->get('name'),
+//                'quantity' => $manga->quantity,
+//                'created_at' => $manga->created_at,
+//                'updated_at' => $manga->updated_at
+//            ];
+//        }
         return response()->json([
             'data' => $mangas
         ]);

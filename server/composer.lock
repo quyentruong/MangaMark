@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d9fc06a0ca657e2c26589b04b3e1743",
+    "content-hash": "f98bddf099eb59a72a5efd5177a29848",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -369,48 +369,6 @@
                 "validator"
             ],
             "time": "2020-09-26T15:48:38+00:00"
-        },
-        {
-            "name": "eklundkristoffer/seedster",
-            "version": "3.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/eklundkristoffer/seedster.git",
-                "reference": "c216c8947de27f3abf292a360a6af2547254cda3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/eklundkristoffer/seedster/zipball/c216c8947de27f3abf292a360a6af2547254cda3",
-                "reference": "c216c8947de27f3abf292a360a6af2547254cda3",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|6.*|^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Seedster\\SeedsterServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Seedster\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kristoffer Eklund",
-                    "email": "kristoffereklund1@gmail.com"
-                }
-            ],
-            "time": "2020-03-03T19:32:23+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -1052,78 +1010,6 @@
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
-            "name": "jeremykenedy/laravel-roles",
-            "version": "v2.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeremykenedy/laravel-roles.git",
-                "reference": "475663152ba4b7326afba843ddbce066bb0576bf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeremykenedy/laravel-roles/zipball/475663152ba4b7326afba843ddbce066bb0576bf",
-                "reference": "475663152ba4b7326afba843ddbce066bb0576bf",
-                "shasum": ""
-            },
-            "require": {
-                "eklundkristoffer/seedster": "^3.0",
-                "laravel/framework": "5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|6.*",
-                "laravel/helpers": "^1.1",
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "illuminate/support": "^5.8",
-                "laravel/laravel": "5.8.*",
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "jeremykenedy\\LaravelRoles\\RolesServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "jeremykenedy\\LaravelRoles\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Bičan",
-                    "email": "romanbican@seznam.cz"
-                },
-                {
-                    "name": "Jeremy Kenedy",
-                    "email": "jeremykenedy@gmail.com"
-                }
-            ],
-            "description": "Powerful package for handling roles, permissions, and levels in Laravel. Supports Laravel 5.3 and higher",
-            "keywords": [
-                "acl",
-                "laravel",
-                "laravel-levels",
-                "laravel-permissions",
-                "laravel-roles",
-                "levels",
-                "permissions",
-                "roles"
-            ],
-            "funding": [
-                {
-                    "url": "https://www.patreon.com/jeremykenedy",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2020-03-03T19:10:51+00:00"
-        },
-        {
             "name": "laravel/framework",
             "version": "v6.18.42",
             "source": {
@@ -1271,59 +1157,6 @@
                 "laravel"
             ],
             "time": "2020-10-06T14:21:51+00:00"
-        },
-        {
-            "name": "laravel/helpers",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/helpers.git",
-                "reference": "b4b8d6e84a6306fc88870f61a244d8c537779f2d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/helpers/zipball/b4b8d6e84a6306fc88870f61a244d8c537779f2d",
-                "reference": "b4b8d6e84a6306fc88870f61a244d8c537779f2d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0",
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0|^8.0|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                },
-                {
-                    "name": "Dries Vints",
-                    "email": "dries.vints@gmail.com"
-                }
-            ],
-            "description": "Provides backwards compatibility for helpers in the latest Laravel release.",
-            "keywords": [
-                "helpers",
-                "laravel"
-            ],
-            "time": "2020-08-25T17:54:37+00:00"
         },
         {
             "name": "laravel/slack-notification-channel",

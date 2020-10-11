@@ -14,7 +14,6 @@
         "ext-redis": "*",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
-        "jeremykenedy/laravel-roles": "^2.3",
         "laravel/framework": "^6.0",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^1.0",

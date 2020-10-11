@@ -22,7 +22,9 @@ class MangasExport implements FromCollection, WithHeadings, WithMapping, WithPro
     {
         return [
             'name',
-            'other_name',
+            'other_name_1',
+            'other_name_2',
+            'other_name_3',
             'quantity',
             'created_at',
             'updated_at'
@@ -33,7 +35,9 @@ class MangasExport implements FromCollection, WithHeadings, WithMapping, WithPro
     {
         return [
             $row->name,
-            $row->other_name,
+            $row->other_name_1,
+            $row->other_name_2,
+            $row->other_name_3,
             $row->quantity,
             $row->created_at,
             $row->updated_at

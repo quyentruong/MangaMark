@@ -23,7 +23,6 @@ class AnimesImport implements ToCollection, WithHeadingRow
             if ($user->animes()->where('name', $row['name'])->first() === null) {
                 $user->animes()->create([
                     'name' => $row['name'],
-                    'other_name' => $row['other_name'],
                     'season' => $row['season'],
                     'quantity' => $row['quantity'],
                     'created_at' => $row['created_at'],

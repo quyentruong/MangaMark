@@ -22,7 +22,6 @@ class AnimesExport implements FromCollection, WithHeadings, WithMapping, WithPro
     {
         return [
             'name',
-            'other_name',
             'season',
             'quantity',
             'created_at',
@@ -34,7 +33,6 @@ class AnimesExport implements FromCollection, WithHeadings, WithMapping, WithPro
     {
         return [
             $row->name,
-            $row->other_name,
             $row->season,
             $row->quantity,
             $row->created_at,

@@ -23,7 +23,7 @@ class MangasImport implements ToCollection, WithHeadingRow
             if ($user->mangas()->where('name', $row['name'])->first() === null) {
                 $user->mangas()->create([
                     'name' => $row['name'],
-                    'other_name' => $row['other_name'],
+                    'other_name_1' => $row['other_name'],
                     'quantity' => $row['quantity'],
                     'created_at' => $row['created_at'],
                     'updated_at' => $row['updated_at'],

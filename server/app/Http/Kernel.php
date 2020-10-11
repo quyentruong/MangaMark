@@ -62,10 +62,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt' => \App\Http\Middleware\JWTMiddleware::class,
-        'role'          => \jeremykenedy\LaravelRoles\Middleware\VerifyRole::class,
-        'permission'    => \jeremykenedy\LaravelRoles\Middleware\VerifyPermission::class,
-        'level'         => \jeremykenedy\LaravelRoles\Middleware\VerifyLevel::class,
-
     ];
 
     /**

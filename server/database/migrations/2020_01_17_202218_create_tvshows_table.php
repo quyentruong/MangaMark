@@ -20,8 +20,8 @@ class CreateTVShowsTable extends Migration
             $table->integer('season');
             $table->integer('quantity');
             $table->timestamps();
-            $table->unique(['user_id', 'name']);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unique(['user_id', 'name'], 't_v_show_unique');
+            $table->foreign('user_id', 't_v_show_foreign')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
