@@ -19,11 +19,12 @@ class ApiKeyController extends Controller
         ]);
         if ($this->checkApi($request->user_id, $request->api) === false)
             return response()->json("Api Key incorrect", 500);
-        $manga = DB::table('mangas')->where('user_id', '=', $request->user_id)->where(function ($query) use ($request) {
-            $query->where('name', $request->manga_name)
-                ->orWhere('other_name_1', $request->manga_name)
-                ->orWhere('other_name_2', $request->manga_name)
-                ->orWhere('other_name_3', $request->manga_name);
+        $manga_name = $request->manga_name;
+        $manga = DB::table('mangas')->where('user_id', '=', $request->user_id)->where(function ($query) use ($manga_name) {
+            $query->where('name','=', $manga_name)
+                ->orWhere('other_name_1','=', $manga_name)
+                ->orWhere('other_name_2','=', $manga_name)
+                ->orWhere('other_name_3','=', $manga_name);
         })->first();
         if ($manga === null)
             return response()->json("This manga is not found", 404);
@@ -42,12 +43,15 @@ class ApiKeyController extends Controller
         ]);
         if ($this->checkApi($request->user_id, $request->api) === false)
             return response()->json("Api Key incorrect", 500);
-        $manga = DB::table('mangas')->where('user_id', '=', $request->user_id)->where(function ($query) use ($request) {
-            $query->where('name', $request->manga_name)
-                ->orWhere('other_name_1', $request->manga_name)
-                ->orWhere('other_name_2', $request->manga_name)
-                ->orWhere('other_name_3', $request->manga_name);
+        $manga_name = $request->manga_name;
+        $manga = DB::table('mangas')->where('user_id', '=', $request->user_id)->where(function ($query) use ($manga_name) {
+            $query->where('name','=', $manga_name)
+                ->orWhere('other_name_1','=', $manga_name)
+                ->orWhere('other_name_2','=', $manga_name)
+                ->orWhere('other_name_3','=', $manga_name);
         })->first();
+        if ($manga === null)
+            return response()->json("This manga is not found", 404);
         $manga->update([
             'quantity' => $request->chap_number
         ]);
