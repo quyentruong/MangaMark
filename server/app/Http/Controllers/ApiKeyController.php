@@ -53,7 +53,7 @@ class ApiKeyController extends Controller
         if ($manga === null)
             return response()->json("This manga is not found", 404);
         $manga->update([
-            'quantity' => $request->chap_number
+            'quantity' => $request->floatval(chap_number)
         ]);
         return response()->json([
             'data' => $manga
