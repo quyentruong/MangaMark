@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Manga;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,11 +18,12 @@ class ApiKeyController extends Controller
         ]);
         if ($this->checkApi($request->user_id, $request->api) === false)
             return response()->json("Api Key incorrect", 500);
-        $manga = User::find($request->user_id)->mangas()->where('name', $request->manga_name)
-            ->orWhere('other_name_1',$request->manga_name)
-            ->orWhere('other_name_2',$request->manga_name)
-            ->orWhere('other_name_3',$request->manga_name)
-            ->first();
+        $manga = DB::table('mangas')->where('user_id', '=', $request->user_id)->where(function ($query) use ($request) {
+            $query->where('name', $request->manga_name)
+                ->orWhere('other_name_1', $request->manga_name)
+                ->orWhere('other_name_2', $request->manga_name)
+                ->orWhere('other_name_3', $request->manga_name);
+        })->first();
         if ($manga === null)
             return response()->json("This manga is not found", 404);
         return response()->json([
@@ -39,11 +41,12 @@ class ApiKeyController extends Controller
         ]);
         if ($this->checkApi($request->user_id, $request->api) === false)
             return response()->json("Api Key incorrect", 500);
-        $manga = User::find($request->user_id)->mangas()->where('name', $request->manga_name)
-            ->orWhere('other_name_1',$request->manga_name)
-            ->orWhere('other_name_2',$request->manga_name)
-            ->orWhere('other_name_3',$request->manga_name)
-            ->first();
+        $manga = DB::table('mangas')->where('user_id', '=', $request->user_id)->where(function ($query) use ($request) {
+            $query->where('name', $request->manga_name)
+                ->orWhere('other_name_1', $request->manga_name)
+                ->orWhere('other_name_2', $request->manga_name)
+                ->orWhere('other_name_3', $request->manga_name);
+        })->first();
         $manga->update([
             'quantity' => $request->chap_number
         ]);
@@ -52,16 +55,17 @@ class ApiKeyController extends Controller
         ]);
     }
 
-    public function generateApiKey(Request $request) {
+    public function generateApiKey(Request $request)
+    {
         $request->validate([
             'id' => 'required|numeric|min:1',
         ]);
         $user = User::find($request->id);
         $user->update([
-           'api_key' => Str::random(40)
+            'api_key' => Str::random(40)
         ]);
         return response()->json([
-           'data' => $user
+            'data' => $user
         ]);
     }
 
