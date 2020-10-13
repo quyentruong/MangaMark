@@ -55,8 +55,8 @@ export default {
         let maxLength = title.length
 
         if (this.$vuetify.breakpoint.name === 'sm') {
-          maxLength = 25 - lastWordLength - secondLastWordLength - thirdLastWordLength
-          if (maxLength < 0) { maxLength = 25 - lastWordLength - secondLastWordLength }
+          maxLength = 40 - lastWordLength - secondLastWordLength - thirdLastWordLength
+          if (maxLength < 0) { maxLength = 40 - lastWordLength - secondLastWordLength }
         }
 
         if (this.$vuetify.breakpoint.name === 'md') {

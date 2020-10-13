@@ -1,14 +1,19 @@
 <template>
   <span>
-    <v-icon
-      v-if="buttonType==='+'"
-      @click="modifyQuantity(item, columnName,'+')"
-      class="mr-2"
-      color="green"
-      size="25px"
-    >
-      mdi-arrow-up-circle-outline
-    </v-icon>
+    <v-list-item v-if="buttonType==='+'" @click="modifyQuantity(item, columnName,'+')">
+      <v-list-item-icon>
+        <v-icon
+          class="mr-2"
+          color="green"
+          size="25px"
+        >
+          mdi-arrow-up-circle-outline
+        </v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>
+        <v-list-item-title>Increase</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
     <v-list-item @click="modifyQuantity(item, columnName,'-')" v-else>
       <v-list-item-icon>
         <v-icon

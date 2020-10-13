@@ -54,7 +54,6 @@
           <div>{{ $moment.utc(item.updated_at).local().format('YYYY-MM-DD HH:mm:ss') }}</div>
         </template>
         <template v-slot:item.action="{ item }">
-          <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="+" column-name="quantity" />
           <v-menu offset-y close-on-content-click>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -69,6 +68,7 @@
               </v-btn>
             </template>
             <v-list>
+              <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="+" column-name="quantity" />
               <AddDecreaseNumber :item="item" :enabled="enabled" @modifyItem="modifyChild" button-type="-" column-name="quantity" />
               <DeleteDialog :item="item" @deleteItem="deleteItem" />
               <v-list-item @click="googleItem(item.name, item.season, item.quantity)">
