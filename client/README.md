@@ -1,4 +1,4 @@
-# MangaAnimeTrack
+# Manga Mark Client
 
 > My impressive Nuxt.js project
 
