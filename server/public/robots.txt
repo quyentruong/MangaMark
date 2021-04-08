@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 Allow: /
-Sitemap: https://mangamark.herokuapp.com//sitemap.xml
+Sitemap: http://mangamark.test/sitemap.xml
