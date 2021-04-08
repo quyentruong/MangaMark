@@ -58,7 +58,7 @@
   "crossorigin": "use-credentials",
   "runtimeCaching": [
     {
-      "urlPattern": "http://mangamark.test/api/profile/",
+      "urlPattern": "https://mangamark.herokuapp.com//api/profile/",
       "strategyOptions": {
         "cacheName": "profile",
         "cacheExpiration": {
