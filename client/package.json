@@ -1,0 +1,49 @@
+{
+  "name": "MangaMark",
+  "version": "2.0.0",
+  "description": "My fabulous Nuxt.js project",
+  "author": "Quyen Truong",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt --port 12345",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+    "clean": "del-cli -f ../server/public/_nuxt/*",
+    "rename": "renamer --find html --replace blade.php \"./dist/**\"",
+    "copy1": "copyfiles -V -u 1 -e \"./dist/200.blade.php\" \"./dist/*.blade.php\" \"./dist/guest/*.blade.php\" ../server/resources/views/",
+    "copy2": "copyfiles -V -u 1 \"./dist/_nuxt/**\" ../server/public/",
+    "copy3": "copyfiles -V -f \"./dist/sitemap.xml\" \"./dist/robots.txt\" \"./dist/sw.js\" ../server/public/",
+    "postbuild": "yarn clean && yarn rename && yarn copy1 && yarn copy2 && yarn copy3",
+    "postgenerate": "yarn clean && yarn rename && yarn copy1 && yarn copy2 && yarn copy3"
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.8.4",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/recaptcha": "^0.6.1",
+    "@nuxtjs/robots": "^2.4.2",
+    "@nuxtjs/sitemap": "^2.0.0",
+    "nuxt": "^2.0.0",
+    "store": "^2.0.12",
+    "vue-clipboard2": "^0.3.1",
+    "vue-warehouse": "^1.0.2",
+    "vuetify-confirm": "^2.0.6",
+    "vuex-map-fields": "^1.3.6"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^1.0.1",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/moment": "^1.4.0",
+    "@nuxtjs/vuetify": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "cheerio": "^1.0.0-rc.3",
+    "copyfiles": "^2.1.1",
+    "del-cli": "^3.0.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "renamer": "^1.1.4"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "name": "MangaMark",
+  "short_name": "MangaMark",
+  "description": "My fabulous Nuxt.js project",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "/_nuxt/icons/icon_64x64.d3360c.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_120x120.d3360c.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_144x144.d3360c.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_152x152.d3360c.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_192x192.d3360c.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_384x384.d3360c.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_512x512.d3360c.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en",
+  "crossorigin": "use-credentials",
+  "runtimeCaching": [
+    {
+      "urlPattern": "https://mangamark.herokuapp.com//api/profile/",
+      "strategyOptions": {
+        "cacheName": "profile",
+        "cacheExpiration": {
+          "maxEntries": 10,
+          "maxAgeSeconds": 300
+        }
+      },
+      "method": "GET"
+    }
+  ]
+}

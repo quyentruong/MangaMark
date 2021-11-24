@@ -1,0 +1,11 @@
+/*https://transfonter.org/*/
+@font-face {
+  font-family: 'Be Vietnam';
+  src: local('Be Vietnam Regular'), local('BeVietnam-Regular'),
+  url('../fonts/BeVietnam/subset-BeVietnam-Regular.woff2') format('woff2'),
+  url('../fonts/BeVietnam/subset-BeVietnam-Regular.woff') format('woff'),
+  url('../fonts/BeVietnam/subset-BeVietnam-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
