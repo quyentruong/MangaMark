@@ -151,6 +151,8 @@ export default {
   methods: {
     save () {
       this.cell.action = 'other_name'
+      delete this.cell.created_at
+      delete this.cell.updated_at
       this.$axios.$put(`category/${this.enabled.toLowerCase()}/${this.cell.id}`, this.cell).then(() => {
         this.dialog = false
         this.$store.dispatch('setSnackbar', { text: this.cell.name + ' updated' })

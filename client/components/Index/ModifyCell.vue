@@ -82,7 +82,9 @@ export default {
     save (action) {
       const item = action
       item.action = this.columnName === 'name' ? 'name' : this.columnName === 'other_name' ? 'other_name' : 'number'
-
+      // Remove key time from item to let server update
+      delete item.created_at
+      delete item.updated_at
       this.$axios.$put(`category/${this.enabled.toLowerCase()}/${item.id}`, item).then(() => {
         this.$store.dispatch('setSnackbar', { text: item.name + ' updated' })
       }).catch((error) => {
