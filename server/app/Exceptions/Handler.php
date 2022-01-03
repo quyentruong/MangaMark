@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use Throwable;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
      * @param \Exception $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
      * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         // return parent::render($request, $exception);
 
@@ -66,10 +66,10 @@ class Handler extends ExceptionHandler
                 'status_code' => 403
             ];
         } elseif ($exception instanceof NotFoundHttpException) {
-//            $json = [
-//                'error' => 'Sorry, the page you are looking for could not be found.',
-//                'status_code' => 403
-//            ];
+            //            $json = [
+            //                'error' => 'Sorry, the page you are looking for could not be found.',
+            //                'status_code' => 403
+            //            ];
             return parent::render($request, $exception);
         } else {
             // Default to vague error to avoid revealing sensitive information

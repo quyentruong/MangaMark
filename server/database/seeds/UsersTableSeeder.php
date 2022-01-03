@@ -19,13 +19,17 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin' . '@admin.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         DB::table('users')->insert([
             'name' => Str::random(10),
             'email' => 'user' . '@user.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
-//        factory(User::class,5)->create();
+        //        factory(User::class,5)->create();
     }
 }

@@ -67,7 +67,9 @@ export default {
       item.action = 'number'
       const text = action === '+' ? 'Increase' : 'Decrease'
       const color = action === '+' ? 'primary' : 'secondary'
-
+      // Remove key time from item to let server update
+      delete item.created_at
+      delete item.updated_at
       this.$axios.$put(`category/${this.enabled.toLowerCase()}/${item.id}`, item).then(() => {
         this.$emit('modifyItem')
         this.$store.dispatch('setSnackbar', { color, text: text + ' activated' })
