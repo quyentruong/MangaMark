@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Anime;
+use App\Models\Anime;
 use App\Exports\AnimesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\AnimeRequest;
 use App\Imports\AnimesImport;
-use App\User;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -119,6 +119,6 @@ class AnimeController extends Controller
     public function destroy(Anime $anime)
     {
         $anime->delete();
-        return response()->json(null,204);
+        return response()->json(null, 204);
     }
 }

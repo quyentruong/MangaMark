@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Hashing\BcryptHasher;
 use App\Http\Resources\User as UserResource;
@@ -49,13 +49,11 @@ class AuthController extends Controller
                 // Return error message if validation failed
 
                 return response()->json(['error' => 'invalid_credentials'], 401);
-
             }
         } catch (JWTException $e) {
             // Return Error message if cannot create token.
 
             return response()->json(['error' => 'could_not_create_token'], 500);
-
         }
 
         // transform user data

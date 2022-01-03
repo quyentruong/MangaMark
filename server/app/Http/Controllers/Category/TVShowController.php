@@ -6,8 +6,8 @@ use App\Exports\TVShowsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\TVShowRequest;
 use App\Imports\TVShowsImport;
-use App\TVShow;
-use App\User;
+use App\Models\TVShow;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -119,6 +119,6 @@ class TVShowController extends Controller
     public function destroy(TVShow $tvshow)
     {
         $tvshow->delete();
-        return response()->json(null,204);
+        return response()->json(null, 204);
     }
 }

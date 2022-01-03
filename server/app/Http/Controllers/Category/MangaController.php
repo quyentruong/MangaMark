@@ -6,8 +6,8 @@ use App\Exports\MangasExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\MangaRequest;
 use App\Imports\MangasImport;
-use App\Manga;
-use App\User;
+use App\Models\Manga;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -47,17 +47,17 @@ class MangaController extends Controller
     public function index(Request $request)
     {
         $mangas = User::find($request->user()->id)->mangas()->get();
-//        $result = array();
-//        foreach ($mangas as $manga) {
-//            $result[] = [
-//                'id' => $manga->id,
-//                'user_id' => $manga->user_id,
-//                'name' => $manga->name,
-//                'quantity' => $manga->quantity,
-//                'created_at' => $manga->created_at,
-//                'updated_at' => $manga->updated_at
-//            ];
-//        }
+        //        $result = array();
+        //        foreach ($mangas as $manga) {
+        //            $result[] = [
+        //                'id' => $manga->id,
+        //                'user_id' => $manga->user_id,
+        //                'name' => $manga->name,
+        //                'quantity' => $manga->quantity,
+        //                'created_at' => $manga->created_at,
+        //                'updated_at' => $manga->updated_at
+        //            ];
+        //        }
         return response()->json([
             'data' => $mangas
         ]);

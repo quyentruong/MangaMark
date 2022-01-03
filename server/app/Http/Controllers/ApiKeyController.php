@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Manga;
-use App\User;
+use App\Models\Manga;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

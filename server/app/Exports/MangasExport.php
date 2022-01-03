@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\User;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -45,8 +45,8 @@ class MangasExport implements FromCollection, WithHeadings, WithMapping, WithPro
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return User::find($this->id)->mangas()->get();

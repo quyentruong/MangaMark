@@ -1,17 +1,25 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Manga;
-use App\User;
-use Faker\Generator as Faker;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Manga::class, function (Faker $faker) {
-    $users = User::all()->pluck('id')->toArray();
-    return [
-        'name' => $faker->words($faker->numberBetween(3, 9), true),
-//        'name' => $faker->regexify('[A-Za-z0-9]{20}'),
-        'user_id' => $faker->randomElement($users),
-        'quantity' => $faker->numberBetween(1, 100)
-    ];
-});
+class MangaFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $users = User::all()->pluck('id')->toArray();
+        return [
+            'name' => $this->faker->words($this->faker->numberBetween(3, 9), true),
+            //        'name' => $faker->regexify('[A-Za-z0-9]{20}'),
+            'user_id' => $this->faker->randomElement($users),
+            'quantity' => $this->faker->numberBetween(1, 100)
+        ];
+    }
+}
