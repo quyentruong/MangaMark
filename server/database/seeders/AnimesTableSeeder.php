@@ -1,5 +1,8 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Anime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +16,6 @@ class AnimesTableSeeder extends Seeder
     public function run()
     {
         DB::table('animes')->truncate();
-        factory(App\Anime::class, 100)->create();
+        Anime::factory(100)->create();
     }
 }

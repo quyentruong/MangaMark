@@ -1,5 +1,8 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Manga;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +16,6 @@ class MangasTableSeeder extends Seeder
     public function run()
     {
         DB::table('mangas')->truncate();
-        factory(App\Manga::class, 100)->create();
+        Manga::factory(100)->create();
     }
 }
