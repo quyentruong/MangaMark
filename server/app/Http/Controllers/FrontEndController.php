@@ -13,26 +13,36 @@ class FrontEndController extends Controller
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
-    public function login() {
+    public function login()
+    {
         return view('guest.login');
     }
-    public function profile() {
+    public function faq()
+    {
+        return view('faq');
+    }
+    public function profile()
+    {
         return view('profile');
     }
-    public function forgot_password() {
+    public function forgot_password()
+    {
         return view('guest.forgot-password');
     }
-    public function register() {
+    public function register()
+    {
         return view('guest.register');
     }
-    public function reset_password() {
+    public function reset_password()
+    {
         return view('guest.reset-password');
     }
-    public function index() {
+    public function index()
+    {
         return view('index');
     }
-    public function verify() {
+    public function verify()
+    {
         return view('guest.verify');
     }
-
 }
