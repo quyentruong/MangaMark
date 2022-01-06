@@ -1,12 +1,7 @@
 <template>
   <v-menu offset-y close-on-content-click>
-    <template v-slot:activator="{ on }">
-      <v-btn
-        v-on="on"
-        color="primary"
-      >
-        Delete Data
-      </v-btn>
+    <template #activator="{ on }">
+      <v-btn color="primary" v-on="on"> Delete Data </v-btn>
     </template>
     <v-list>
       <v-list-item @click="collection_delete('manga')">
@@ -41,26 +36,30 @@
 export default {
   name: 'Delete',
   methods: {
-    collection_delete (category) {
+    collection_delete(category) {
       const options = {
         title: 'Warning',
         buttonTrueText: 'Delete',
         color: 'red',
-        buttonFalseText: 'Cancel'
+        buttonFalseText: 'Cancel',
       }
-      this.$confirm(`Do you really want to delete all ${this.$capitalize(category)} data?`, options
+      this.$confirm(
+        `Do you really want to delete all ${this.$capitalize(category)} data?`,
+        options
       ).then((res) => {
         if (res === true) {
-          this.$axios.$delete(`delete/${category}/${this.$auth.user.id}`).then((response) => {
-            this.$store.dispatch('setSnackbar', { text: `All ${this.$capitalize(category)} deleted successfully` })
-          })
+          this.$axios
+            .$delete(`delete/${category}/${this.$auth.user.id}`)
+            .then((response) => {
+              this.$store.dispatch('setSnackbar', {
+                text: `All ${this.$capitalize(category)} deleted successfully`,
+              })
+            })
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

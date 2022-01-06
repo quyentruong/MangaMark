@@ -1,18 +1,8 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
-  >
-    <v-col
-      xs="12"
-      sm="8"
-    >
+  <v-row align="center" justify="center">
+    <v-col xs="12" sm="8">
       <v-card class="elevation-12">
-        <v-toolbar
-          color="primary"
-          dark
-          flat
-        >
+        <v-toolbar color="primary" dark flat>
           <v-toolbar-title>Register form</v-toolbar-title>
         </v-toolbar>
         <v-card-text @keyup.enter="register">
@@ -46,7 +36,10 @@
 
             <v-text-field
               v-model="form.password_confirmation"
-              :rules="[required('Confirmation Password'), passwordConfirmation(form.password, form.password_confirmation)]"
+              :rules="[
+                required('Confirmation Password'),
+                passwordConfirmation(form.password, form.password_confirmation),
+              ]"
               label="Confirmation Password"
               prepend-icon="mdi-lock"
               type="password"
@@ -55,9 +48,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="register" color="primary">
-            Create a account
-          </v-btn>
+          <v-btn color="primary" @click="register"> Create a account </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -72,24 +63,30 @@ export default {
   data: () => ({
     modelstate: {},
     form: {},
-    ...validations
+    ...validations,
   }),
-  head () {
+  head() {
     return {
-      title: 'Register'
+      title: 'Register',
       //   meta: [
       //     { hid: 'description', name: 'description', content: 'Sign up to explore new world of MangaMark' }
       //   ]
     }
   },
   methods: {
-    onError () {
-      this.$store.dispatch('setSnackbar', { color: 'error', text: 'You need to check "I\'m not a robot"' })
+    onError() {
+      this.$store.dispatch('setSnackbar', {
+        color: 'error',
+        text: 'You need to check "I\'m not a robot"',
+      })
     },
-    onExpired () {
-      this.$store.dispatch('setSnackbar', { color: 'error', text: 'Verification expired. Check the box again' })
+    onExpired() {
+      this.$store.dispatch('setSnackbar', {
+        color: 'error',
+        text: 'Verification expired. Check the box again',
+      })
     },
-    async register () {
+    async register() {
       if (this.$refs.form.validate()) {
         try {
           await this.$recaptcha.getResponse()
@@ -97,20 +94,20 @@ export default {
           return
         }
         this.modelstate = {}
-        await this.$axios.$post('auth/register', this.form).then(() => {
-          this.$router.push('/guest/verify')
-        })
+        await this.$axios
+          .$post('auth/register', this.form)
+          .then(() => {
+            this.$router.push('/guest/verify')
+          })
           .catch((error) => {
             if (error.response.status === 422) {
               this.modelstate = error.response.data.error
             }
           })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

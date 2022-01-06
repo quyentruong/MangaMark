@@ -5,17 +5,17 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false,
   },
   extends: [
     '@nuxtjs',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
+    'prettier'
   ],
   // add your custom rules here
   rules: {
-    "template-curly-spacing" : "off",
-    indent : "off",
-    'vue/comment-directive': 'off',
+    "vue/multi-word-component-names": "off",
+    "camelcase": "off"
   }
-  
 }
