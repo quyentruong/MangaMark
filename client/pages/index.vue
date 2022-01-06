@@ -11,6 +11,7 @@
         <!--        Ending Slot-->
         <v-spacer />
         <!--        Starting Filter-->
+
         <v-text-field
           v-model="search"
           prepend-inner-icon="mdi-magnify"
@@ -21,7 +22,10 @@
           filled
           rounded
           dense
+          v-bind="attrs"
+          v-on="on"
         />
+
         <!--        Ending Filter-->
         <v-spacer />
         <!--        Starting Add new item-->
@@ -36,7 +40,6 @@
         :search="search"
         :options.sync="options"
         hide-default-footer
-        single-expand
         @page-count="pageCount = $event"
       >
         <!--        Starting column name-->
@@ -131,6 +134,7 @@ import ModifyCell from '../components/Index/ModifyCell'
 import AddDecreaseNumber from '../components/Index/AddDecreaseNumber'
 import DeleteDialog from '../components/Index/DeleteDialog'
 import OtherName from '@/components/Index/OtherName'
+import customFilterHelper from '@/utils/custom-filter'
 export default {
   components: {
     OtherName,
@@ -189,16 +193,19 @@ export default {
   },
   methods: {
     customFilter(value, search, items) {
+      return customFilterHelper(this.$moment, search, items)
       // eslint-disable-next-line camelcase
-      const {
-        name,
-        quantity,
-        season,
-        other_name_1,
-        other_name_2,
-        other_name_3,
-        updated_at,
-      } = items
+
+      // const {
+      //   name,
+      //   quantity,
+      //   season,
+      //   other_name_1,
+      //   other_name_2,
+      //   other_name_3,
+      //   updated_at,
+      // } = items
+
       // delete items.updated_at
       // delete items.created_at
       // delete items.user_id
@@ -208,31 +215,18 @@ export default {
       all object values rather than just the keys included
       in the data table headers.
        */
-      const wordArray = search
-        .toString()
-        .toLowerCase()
-        .split(' ')
-        .filter((x) => x)
-      return wordArray.every((word) =>
-        JSON.stringify(
-          Object.values({
-            name,
-            quantity,
-            season,
-            other_name_1,
-            other_name_2,
-            other_name_3,
-            updated_at,
-          })
-        )
-          .toString()
-          .toLowerCase()
-          .includes(word)
-      )
-    },
-    expandFunc(expand, isExpanded) {
-      expand(isExpanded)
-      this.selectExpand = true
+
+      // const wordArray = search
+      //   .toString()
+      //   .toLowerCase()
+      //   .split(' ')
+      //   .filter((x) => x)
+      // return wordArray.every((word) => {
+      //   return JSON.stringify(Object.values(items))
+      //     .toString()
+      //     .toLowerCase()
+      //     .includes(word)
+      // })
     },
     oldRead(props) {
       // console.log(props)

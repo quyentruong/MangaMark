@@ -94,8 +94,3 @@ sw.*
 
 # Vim swap files
 *.swp
-.eslintrc.js
-.prettierrc.
-.prettierignore
-jsconfig.json
-package.json
