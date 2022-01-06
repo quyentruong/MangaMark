@@ -5,6 +5,13 @@
         <v-btn :color="$vuetify.theme.dark === true ? '' : 'white'" to="/" icon>
           <v-icon>mdi-home</v-icon>
         </v-btn>
+        <v-btn
+          :color="$vuetify.theme.dark === true ? '' : 'white'"
+          to="/faq"
+          icon
+        >
+          <v-icon>mdi-chat-question</v-icon>
+        </v-btn>
       </v-toolbar-title>
       <v-spacer />
       <v-label>{{ $vuetify.breakpoint.name }}</v-label>
@@ -78,6 +85,14 @@
     </v-snackbar>
     <v-footer app>
       <span>&copy; Quyen Truong {{ new Date().getFullYear() }}</span>
+
+      <v-btn
+        :color="$vuetify.theme.dark === true ? '' : 'white'"
+        icon
+        @click="source"
+      >
+        <v-icon>mdi-github</v-icon>
+      </v-btn>
     </v-footer>
   </v-app>
 </template>
@@ -100,6 +115,9 @@ export default {
     setDark() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
       this.$warehouse.set('dark', this.$vuetify.theme.dark)
+    },
+    source() {
+      window.open('https://github.com/quyentruong/MangaMark')
     },
   },
 }

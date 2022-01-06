@@ -24,6 +24,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', 'FrontEndController@index')->name('frontend.index');
 Route::get('/profile', 'FrontEndController@profile')->name('frontend.profile');
+Route::get('/faq', 'FrontEndController@faq')->name('frontend.faq');
 Route::get('/guest/login', 'FrontEndController@login')->name('frontend.login');
 Route::get('/guest/register', 'FrontEndController@register')->name('frontend.register');
 Route::get('/guest/forgot-password', 'FrontEndController@forgot_password')->name('frontend.forgot_password');

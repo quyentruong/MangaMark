@@ -11,6 +11,11 @@ const routeMeta = {
     description:
       'Have you ever wonder how to keep tracking your progress in reading manga ? This webapp will help you about it.',
   },
+  '/faq': {
+    name: 'FAQ',
+    description:
+      'Have you ever wondered how to use this website? This is the answer to all your questions.',
+  },
   '/guest/login': {
     name: 'Login',
     description: 'Ready to explore new world of MangaMark',
