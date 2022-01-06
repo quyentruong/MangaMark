@@ -1,10 +1,6 @@
 <template>
-  <v-card @keyup.enter="change" class="elevation-12">
-    <v-toolbar
-      color="primary"
-      dark
-      flat
-    >
+  <v-card class="elevation-12" @keyup.enter="change">
+    <v-toolbar color="primary" dark flat>
       <v-toolbar-title>Profile</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
@@ -59,7 +55,7 @@
           </v-col>
         </v-row>
         <v-text-field
-          v-model="new Date($auth.user.created_at).toString()"
+          :value="new Date($auth.user.created_at).toString()"
           label="Created At"
           prepend-icon="mdi-calendar"
           disabled
@@ -74,12 +70,8 @@
             />
           </v-col>
           <v-col>
-            <v-btn @click="generateKey">
-              Generate
-            </v-btn>
-            <v-btn @click="copyKey">
-              Copy
-            </v-btn>
+            <v-btn @click="generateKey"> Generate </v-btn>
+            <v-btn @click="copyKey"> Copy </v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -87,9 +79,7 @@
     <v-card-actions>
       <v-row style="margin-top: -30px">
         <v-col>
-          <v-btn @click="change" color="primary">
-            Save
-          </v-btn>
+          <v-btn color="primary" @click="change"> Save </v-btn>
         </v-col>
         <v-col>
           <Import />
@@ -124,11 +114,11 @@ export default {
     mangaFile: new File([''], 'Manga'),
     animeFile: new File([''], 'Anime'),
     modelstate: {},
-    ...validations
+    ...validations,
   }),
-  head () {
+  head() {
     return {
-      title: 'Profile'
+      title: 'Profile',
       //   meta: [
       //     { hid: 'description', name: 'description', content: 'Modify your name, email, and password' }
       //   ]
@@ -137,43 +127,52 @@ export default {
   computed: {
     ...mapFields({
       userName: 'auth.user.name',
-      userEmail: 'auth.user.email'
-    })
+      userEmail: 'auth.user.email',
+    }),
   },
-  created () {
+  created() {
     this.api_key = this.$auth.user.api_key
   },
   methods: {
-    async generateKey () {
+    async generateKey() {
       await this.$axios.$put('generateapi', this.$auth.user).then((res) => {
         this.$store.dispatch('setSnackbar', { text: 'Generated API Key' })
         this.api_key = res.data.api_key
       })
     },
-    copyKey () {
-      this.$copyText(this.api_key).then((e) => {
-        this.$store.dispatch('setSnackbar', { color: 'info', text: `Copied ${this.api_key}` })
-      }, (e) => {
-        this.$store.dispatch('setSnackbar', { color: 'error', text: 'Can not copy' })
-      })
+    copyKey() {
+      this.$copyText(this.api_key).then(
+        (e) => {
+          this.$store.dispatch('setSnackbar', {
+            color: 'info',
+            text: `Copied ${this.api_key}`,
+          })
+        },
+        (e) => {
+          this.$store.dispatch('setSnackbar', {
+            color: 'error',
+            text: 'Can not copy',
+          })
+        }
+      )
     },
-    async change () {
+    async change() {
       if (this.$refs.form.validate()) {
         this.modelstate = {}
-        await this.$axios.$put('profile', this.$auth.user).then(() => {
-          this.$store.dispatch('setSnackbar', { text: 'Save Changes' })
-        })
+        await this.$axios
+          .$put('profile', this.$auth.user)
+          .then(() => {
+            this.$store.dispatch('setSnackbar', { text: 'Save Changes' })
+          })
           .catch((error) => {
             if (error.response.status === 422) {
               this.modelstate = error.response.data.error
             }
           })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

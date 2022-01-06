@@ -4,36 +4,36 @@ const minify = require('html-minifier').minify
 const routeMeta = {
   '/profile': {
     name: 'Profile',
-    description: 'Modify your name, email, and password'
+    description: 'Modify your name, email, and password',
   },
   '/': {
     name: 'Index',
-    description: 'Have you ever wonder how to keep tracking your progress in reading manga ? This webapp will help you about it.'
+    description:
+      'Have you ever wonder how to keep tracking your progress in reading manga ? This webapp will help you about it.',
   },
   '/guest/login': {
     name: 'Login',
-    description: 'Ready to explore new world of MangaMark'
+    description: 'Ready to explore new world of MangaMark',
   },
   '/guest/register': {
     name: 'Register',
-    description: 'Sign up to explore new world of MangaMark'
+    description: 'Sign up to explore new world of MangaMark',
   },
   '/guest/forgot-password': {
     name: 'Forgot Password',
-    description: 'Don\'t worry if you forgot your password'
+    description: "Don't worry if you forgot your password",
   },
   '/guest/reset-password': {
     name: 'Reset Password',
-    description: 'Reset password to get access again'
+    description: 'Reset password to get access again',
   },
   '/guest/verify': {
     name: 'Verify',
-    description: 'Verify account before login'
-  }
-
+    description: 'Verify account before login',
+  },
 }
 
-function metaMarkup ({ name, description, image, url }) {
+function metaMarkup({ name, description, image, url }) {
   return `
     <meta name="description" content="${description}">
     <meta property="og:type" content="website">
@@ -48,13 +48,13 @@ function metaMarkup ({ name, description, image, url }) {
   `
 }
 
-function meta ({ route, html }) {
+function meta({ route, html }) {
   // meta tags (fill in your info here / dynamic per route)
   const metaTags = {
     name: routeMeta[route].name,
     description: routeMeta[route].description,
     image: process.env.URL + '/favicon.png',
-    url: process.env.URL + route
+    url: process.env.URL + route,
   }
 
   // Load Nuxt generared HTML
@@ -68,7 +68,8 @@ function meta ({ route, html }) {
   // minify result
   // Return new HTML
   return minify($.html(), {
-    collapseWhitespace: true })
+    collapseWhitespace: true,
+  })
 }
 
 exports.meta = meta

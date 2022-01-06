@@ -1,18 +1,8 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
-  >
-    <v-col
-      xs="12"
-      sm="8"
-    >
+  <v-row align="center" justify="center">
+    <v-col xs="12" sm="8">
       <v-card class="elevation-12">
-        <v-toolbar
-          color="primary"
-          dark
-          flat
-        >
+        <v-toolbar color="primary" dark flat>
           <v-toolbar-title>Login form</v-toolbar-title>
         </v-toolbar>
         <v-card-text @keyup.enter="login">
@@ -35,9 +25,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="login" color="primary">
-            Login
-          </v-btn>
+          <v-btn color="primary" @click="login"> Login </v-btn>
           <v-spacer />
           <v-btn color="primary" to="/guest/forgot-password" text>
             Forgot your password?
@@ -55,34 +43,40 @@ export default {
   auth: 'guest',
   data: () => ({
     form: {},
-    ...validations
+    ...validations,
   }),
-  head () {
+  head() {
     return {
-      title: 'Login'
+      title: 'Login',
       //   meta: [
       //     { hid: 'description', name: 'description', content: 'Ready to explore new world of MangaMark' }
       //   ]
     }
   },
   methods: {
-    async login () {
+    async login() {
       if (this.$refs.form.validate()) {
-        await this.$axios.$post('auth/login', this.form).then(() => {
-          this.$auth.login({ data: this.form })
-          this.$store.dispatch('setSnackbar', { text: 'Logging in' })
-        })
+        await this.$axios
+          .$post('auth/login', this.form)
+          .then(() => {
+            this.$auth.login({ data: this.form })
+            this.$store.dispatch('setSnackbar', { text: 'Logging in' })
+          })
           .catch((error) => {
-            if (error.response.status === 404 || error.response.status === 401) {
-              this.$store.dispatch('setSnackbar', { color: 'error', text: error.response.data.error })
+            if (
+              error.response.status === 404 ||
+              error.response.status === 401
+            ) {
+              this.$store.dispatch('setSnackbar', {
+                color: 'error',
+                text: error.response.data.error,
+              })
             }
           })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,10 +1,8 @@
 <template>
   <v-row>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <template v-slot:activator="{ on }">
-        <v-btn v-on="on" color="primary" dark text>
-          Change Password
-        </v-btn>
+      <template #activator="{ on }">
+        <v-btn color="primary" dark text v-on="on"> Change Password </v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -31,7 +29,13 @@
 
             <v-text-field
               v-model="form.new_password_confirmation"
-              :rules="[required('Confirmation New Password'), passwordConfirmation(form.new_password, form.new_password_confirmation)]"
+              :rules="[
+                required('Confirmation New Password'),
+                passwordConfirmation(
+                  form.new_password,
+                  form.new_password_confirmation
+                ),
+              ]"
               label="Confirmation New Password"
               prepend-icon="mdi-lock"
               type="password"
@@ -40,12 +44,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="close" color="blue darken-1" text>
-            Close
-          </v-btn>
-          <v-btn @click="savePassword" color="blue darken-1" text>
-            Save
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="close"> Close </v-btn>
+          <v-btn color="blue darken-1" text @click="savePassword"> Save </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -60,22 +60,27 @@ export default {
     dialog: false,
     form: {},
     modelstate: {},
-    ...validations
+    ...validations,
   }),
   computed: {
-    passwordConfirmationRules () {
-      return this.$store.getters.passwordConfirmationRules(this.form.new_password, this.form.new_password_confirmation)
-    }
+    passwordConfirmationRules() {
+      return this.$store.getters.passwordConfirmationRules(
+        this.form.new_password,
+        this.form.new_password_confirmation
+      )
+    },
   },
   methods: {
-    async savePassword () {
+    async savePassword() {
       if (this.$refs.form.validate()) {
         this.modelstate = {}
-        await this.$axios.$put('profile/password', this.form).then(() => {
-          this.dialog = false
-          this.$store.dispatch('setSnackbar', { text: 'Saved Changes' })
-          this.$refs.form.reset()
-        })
+        await this.$axios
+          .$put('profile/password', this.form)
+          .then(() => {
+            this.dialog = false
+            this.$store.dispatch('setSnackbar', { text: 'Saved Changes' })
+            this.$refs.form.reset()
+          })
           .catch((error) => {
             if (error.response.status === 422) {
               this.modelstate = error.response.data.error
@@ -83,15 +88,13 @@ export default {
           })
       }
     },
-    close () {
+    close() {
       this.$refs.form.reset()
       this.$store.dispatch('setSnackbar', { color: 'error', text: 'Canceled' })
       this.dialog = false
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

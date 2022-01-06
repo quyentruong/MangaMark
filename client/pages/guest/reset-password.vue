@@ -1,18 +1,8 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
-  >
-    <v-col
-      xs="12"
-      sm="8"
-    >
+  <v-row align="center" justify="center">
+    <v-col xs="12" sm="8">
       <v-card class="elevation-12">
-        <v-toolbar
-          color="primary"
-          dark
-          flat
-        >
+        <v-toolbar color="primary" dark flat>
           <v-toolbar-title>Reset form</v-toolbar-title>
         </v-toolbar>
         <v-card-text @keyup.enter="reset">
@@ -42,7 +32,10 @@
 
             <v-text-field
               v-model="form.password_confirmation"
-              :rules="[required('Confirmation Password'), passwordConfirmation(form.password, form.password_confirmation)]"
+              :rules="[
+                required('Confirmation Password'),
+                passwordConfirmation(form.password, form.password_confirmation),
+              ]"
               label="Confirmation New Password"
               prepend-icon="mdi-lock"
               type="password"
@@ -50,9 +43,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="reset" color="primary">
-            Reset
-          </v-btn>
+          <v-btn color="primary" @click="reset"> Reset </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -67,43 +58,46 @@ export default {
   data: () => ({
     modelstate: {},
     form: {},
-    ...validations
+    ...validations,
   }),
-  created () {
-    this.form.token = this.$route.query.token
-  },
-  head () {
+  head() {
     return {
-      title: 'Reset Password'
+      title: 'Reset Password',
       //   meta: [
       //     { hid: 'description', name: 'description', content: 'Reset password to get access again' }
       //   ]
     }
   },
+  created() {
+    this.form.token = this.$route.query.token
+  },
   methods: {
-    async reset () {
+    async reset() {
       if (this.$refs.form.validate()) {
         this.modelstate = {}
-        await this.$axios.$post('auth/reset', this.form).then((response) => {
-          const query = Object.assign({}, this.$route.query)
-          delete query.token
-          this.$router.replace({ query })
-          this.$store.dispatch('setSnackbar', { text: response.message })
-          this.$auth.login({ data: this.form })
-        })
+        await this.$axios
+          .$post('auth/reset', this.form)
+          .then((response) => {
+            const query = Object.assign({}, this.$route.query)
+            delete query.token
+            this.$router.replace({ query })
+            this.$store.dispatch('setSnackbar', { text: response.message })
+            this.$auth.login({ data: this.form })
+          })
           .catch((error) => {
             if (error.response.status === 422) {
               this.modelstate = error.response.data.error
             } else if (error.response.status === 401) {
-              this.$store.dispatch('setSnackbar', { color: 'error', text: error.response.data.error })
+              this.$store.dispatch('setSnackbar', {
+                color: 'error',
+                text: error.response.data.error,
+              })
             }
           })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

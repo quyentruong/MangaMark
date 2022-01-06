@@ -10,29 +10,27 @@
       <v-label>{{ $vuetify.breakpoint.name }}</v-label>
       <v-spacer />
       <v-label>{{ $vuetify.breakpoint.width }}</v-label>
-      <v-btn @click="setDark" icon>
-        <v-icon v-if="$vuetify.theme.dark">
-          mdi-brightness-6
-        </v-icon>
-        <v-icon v-else>
-          mdi-brightness-7
-        </v-icon>
+      <v-btn icon @click="setDark">
+        <v-icon v-if="$vuetify.theme.dark"> mdi-brightness-6 </v-icon>
+        <v-icon v-else> mdi-brightness-7 </v-icon>
       </v-btn>
       <v-toolbar-items>
         <template v-if="$auth.loggedIn">
           <v-menu offset-y close-on-content-click>
-            <template v-slot:activator="{ on }">
+            <template #activator="{ on }">
               <v-btn
                 :icon="$vuetify.breakpoint.name === 'xs'"
-                v-on="on"
                 text
                 color="white"
                 dark
+                v-on="on"
               >
                 <v-icon v-if="$vuetify.breakpoint.name === 'xs'">
                   mdi-account
                 </v-icon>
-                <span v-else class="bartitle" style="text-transform: none">Welcome, {{ $auth.user.email }}</span>
+                <span v-else class="bartitle" style="text-transform: none"
+                  >Welcome, {{ $auth.user.email }}</span
+                >
               </v-btn>
             </template>
             <v-list>
@@ -56,12 +54,8 @@
           </v-menu>
         </template>
         <template v-else>
-          <v-btn to="/guest/register" color="white" text>
-            Sign Up
-          </v-btn>
-          <v-btn to="/guest/login" color="white" text>
-            Login
-          </v-btn>
+          <v-btn to="/guest/register" color="white" text> Sign Up </v-btn>
+          <v-btn to="/guest/login" color="white" text> Login </v-btn>
         </template>
       </v-toolbar-items>
     </v-app-bar>
@@ -71,22 +65,18 @@
       </v-container>
     </v-main>
     <v-snackbar
-      v-for="(snackbar, index) in snackbars.filter(s => s.showing)"
+      v-for="(snackbar, index) in snackbars.filter((s) => s.showing)"
       :key="snackbar.text + Math.random()"
       v-model="snackbar.showing"
       :timeout="snackbar.timeout"
       :color="snackbar.color"
-      :style="`bottom: ${(index * 60) + 8}px`"
+      :style="`bottom: ${index * 60 + 8}px`"
     >
       {{ snackbar.text }}
 
-      <v-btn @click="snackbar.showing = false" text>
-        Close
-      </v-btn>
+      <v-btn text @click="snackbar.showing = false"> Close </v-btn>
     </v-snackbar>
-    <v-footer
-      app
-    >
+    <v-footer app>
       <span>&copy; Quyen Truong {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -96,38 +86,37 @@
 import { mapMultiRowFields } from 'vuex-map-fields'
 export default {
   computed: {
-    ...mapMultiRowFields([
-      'snackbars'
-    ])
+    ...mapMultiRowFields(['snackbars']),
   },
-  created () {
+  created() {
     // console.log(this.$vuetify.breakpoint)
     this.$vuetify.theme.dark = this.$warehouse.get('dark', false)
   },
   methods: {
-    logout () {
+    logout() {
       this.$auth.logout()
       this.$store.dispatch('setSnackbar', { text: 'Logging out' })
     },
-    setDark () {
+    setDark() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
       this.$warehouse.set('dark', this.$vuetify.theme.dark)
-    }
-  }
+    },
+  },
 }
 </script>
 <style>
-  .theme--dark.v-icon,.theme--light.v-icon {
-    opacity: 1.0!important;
-  }
-  /*@media (max-width:400px) and (min-width:300px) {*/
-  /*  .bartitle {*/
-  /*    font-size: 7px;*/
-  /*  }*/
-  /*}*/
-  /*@media (max-width:600px) and (min-width:401px) {*/
-  /*  .bartitle {*/
-  /*    font-size: 12px;*/
-  /*  }*/
-  /*}*/
+.theme--dark.v-icon,
+.theme--light.v-icon {
+  opacity: 1 !important;
+}
+/*@media (max-width:400px) and (min-width:300px) {*/
+/*  .bartitle {*/
+/*    font-size: 7px;*/
+/*  }*/
+/*}*/
+/*@media (max-width:600px) and (min-width:401px) {*/
+/*  .bartitle {*/
+/*    font-size: 12px;*/
+/*  }*/
+/*}*/
 </style>
