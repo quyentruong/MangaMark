@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt --port 12345",
-    "build": "nuxt build",
+    "devlint": "yarn lintfix && yarn dev",
+    "build": "yarn lintfix && nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",

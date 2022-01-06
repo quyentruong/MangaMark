@@ -22,8 +22,6 @@
           filled
           rounded
           dense
-          v-bind="attrs"
-          v-on="on"
         />
 
         <!--        Ending Filter-->

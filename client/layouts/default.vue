@@ -14,9 +14,13 @@
         </v-btn>
       </v-toolbar-title>
       <v-spacer />
-      <v-label>{{ $vuetify.breakpoint.name }}</v-label>
+      <v-label v-if="$auth.user.id === 1">{{
+        $vuetify.breakpoint.name
+      }}</v-label>
       <v-spacer />
-      <v-label>{{ $vuetify.breakpoint.width }}</v-label>
+      <v-label v-if="$auth.user.id === 1">{{
+        $vuetify.breakpoint.width
+      }}</v-label>
       <v-btn icon @click="setDark">
         <v-icon v-if="$vuetify.theme.dark"> mdi-brightness-6 </v-icon>
         <v-icon v-else> mdi-brightness-7 </v-icon>
@@ -87,11 +91,18 @@
       <span>&copy; Quyen Truong {{ new Date().getFullYear() }}</span>
 
       <v-btn
-        :color="$vuetify.theme.dark === true ? '' : 'white'"
+        :color="$vuetify.theme.dark === true ? '' : 'black'"
         icon
         @click="source"
       >
         <v-icon>mdi-github</v-icon>
+      </v-btn>
+      <v-btn
+        :color="$vuetify.theme.dark === true ? '' : 'red'"
+        icon
+        @click="firefox"
+      >
+        <v-icon>mdi-firefox</v-icon>
       </v-btn>
     </v-footer>
   </v-app>
@@ -118,6 +129,9 @@ export default {
     },
     source() {
       window.open('https://github.com/quyentruong/MangaMark')
+    },
+    firefox() {
+      window.open('https://addons.mozilla.org/en-US/firefox/addon/manga-mark/')
     },
   },
 }
