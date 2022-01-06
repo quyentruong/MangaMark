@@ -16,15 +16,17 @@
 <script>
 import faqContent from '@/utils/faq-content'
 export default {
-  auth: false,
   data: () => ({
     faq: [],
   }),
+  head: () => ({
+    title: 'FAQ',
+  }),
+  auth: false,
   created() {
     this.faq = faqContent
   },
 }
 </script>
 
-<style>
-</style>
+<style></style>
