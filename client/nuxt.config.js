@@ -4,7 +4,6 @@ import { meta } from './utils/meta'
 export default {
   ssr: false,
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
   router: {
     middleware: ['auth'],
   },
