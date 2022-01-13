@@ -29,13 +29,13 @@ function customFilterHelper(moment, search, items, filter) {
     }
   }
 
-  if (filter.startsWith('chapter>')) {
+  if (filter.startsWith('chapter≥')) {
     if (parseInt(items.quantity) >= parseInt(search)) {
       return JSON.stringify(Object.values(items))
     }
   }
 
-  if (filter.startsWith('chapter<')) {
+  if (filter.startsWith('chapter≤')) {
     if (parseInt(items.quantity) <= parseInt(search)) {
       return JSON.stringify(Object.values(items))
     }
