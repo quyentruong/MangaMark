@@ -179,8 +179,8 @@ export default {
       filterSlot: [
         'name=',
         'chapter=',
-        'chapter>',
-        'chapter<',
+        'chapter≥',
+        'chapter≤',
         'year=',
         'month=',
         'day=',
