@@ -8,7 +8,7 @@ const faqContent = [
   {
     question: 'How do I use search bar?',
     answer:
-      'Click on the search bar and type the name of the manga or comic book you want to search for. You can also search by chapter, date, or other information. Start with n= to serach for a name, c= to search for a chapter, dd= to search for a day, dm= to search for a month, or dy= to search for a year. For example, n=naruto will search for all naruto manga. You can also use c>1, c<1, or c=1 to search for a chapter greater than 1, less than 1, or equal to 1. You can also use dd=2019-01-01 to search for a date of January 1st, 2019. You can also use dm=2019-01 to search for a month of January 2019. You can also use dy=2019 to search for a year of 2019.',
+      'Click on the search bar and type the name of the manga or comic book you want to search for. You can also search by chapter, date, or other information. Filter with name= to serach for a name, chapter= to search for a chapter, day= to search for a day, month= to search for a month, or year= to search for a year. For example, name=naruto will search for all naruto manga. You can also use chapter>1, chapter<1, or chapter=1 to search for a chapter greater than 1, less than 1, or equal to 1. You can also use day=2019-01-01 to search for a date of January 1st, 2019. You can also use month=2019-01 to search for a month of January 2019. You can also use year=2019 to search for a year of 2019.',
     icon: 'mdi-alert-circle',
     color: 'error',
   },

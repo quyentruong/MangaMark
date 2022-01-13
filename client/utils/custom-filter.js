@@ -1,5 +1,5 @@
-function customFilterHelper(moment, search, items) {
-  if (search.startsWith('n=')) {
+function customFilterHelper(moment, search, items, filter) {
+  if (filter.startsWith('name=')) {
     const {
       name,
       // quantity,
@@ -10,7 +10,6 @@ function customFilterHelper(moment, search, items) {
       // updated_at,
     } = items
     const wordArray = search
-      .split('n=')[1]
       .toString()
       .toLowerCase()
       .split(' ')
@@ -24,51 +23,45 @@ function customFilterHelper(moment, search, items) {
         .includes(word)
     )
   }
-  if (search.startsWith('c=')) {
-    const chap_value = parseInt(search.split('c=')[1])
-    if (parseInt(items.quantity) === chap_value) {
+  if (filter.startsWith('chapter=')) {
+    if (parseInt(items.quantity) === parseInt(search)) {
       return JSON.stringify(Object.values(items))
     }
   }
 
-  if (search.startsWith('c>')) {
-    const chap_value = parseInt(search.split('c>')[1])
-    if (parseInt(items.quantity) >= chap_value) {
+  if (filter.startsWith('chapter>')) {
+    if (parseInt(items.quantity) >= parseInt(search)) {
       return JSON.stringify(Object.values(items))
     }
   }
 
-  if (search.startsWith('c<')) {
-    const chap_value = parseInt(search.split('c<')[1])
-    if (parseInt(items.quantity) <= chap_value) {
+  if (filter.startsWith('chapter<')) {
+    if (parseInt(items.quantity) <= parseInt(search)) {
       return JSON.stringify(Object.values(items))
     }
   }
 
-  if (search.startsWith('dd=')) {
-    const date_value = search.split('dd=')[1]
-    if (date_value.length === 10) {
-      const updated_at = moment(items.updated_at).isSame(date_value, 'day')
+  if (filter.startsWith('day=')) {
+    if (search.length === 10) {
+      const updated_at = moment(items.updated_at).isSame(search, 'day')
       if (updated_at) {
         return JSON.stringify(Object.values(items))
       }
     }
   }
 
-  if (search.startsWith('dm=')) {
-    const date_value = search.split('dm=')[1]
-    if (date_value.length === 7) {
-      const updated_at = moment(items.updated_at).isSame(date_value, 'month')
+  if (filter.startsWith('month=')) {
+    if (search.length === 7) {
+      const updated_at = moment(items.updated_at).isSame(search, 'month')
       if (updated_at) {
         return JSON.stringify(Object.values(items))
       }
     }
   }
 
-  if (search.startsWith('dy=')) {
-    const date_value = search.split('dy=')[1]
-    if (date_value.length === 4) {
-      const updated_at = moment(items.updated_at).isSame(date_value, 'year')
+  if (filter.startsWith('year=')) {
+    if (search.length === 4) {
+      const updated_at = moment(items.updated_at).isSame(search, 'year')
       if (updated_at) {
         return JSON.stringify(Object.values(items))
       }

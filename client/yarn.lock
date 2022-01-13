@@ -3696,6 +3696,11 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+eastasianwidth@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
+  integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -3950,10 +3955,20 @@ eslint-plugin-unicorn@^39.0.0:
     semver "^7.3.5"
     strip-indent "^3.0.0"
 
-eslint-plugin-vue@^8.1.1, eslint-plugin-vue@^8.2.0:
+eslint-plugin-vue@^8.1.1:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-8.2.0.tgz#b404bc10e3f43b2b7aad4ebb3b38090a58040202"
   integrity sha512-cLIdTuOAMXyHeQ4drYKcZfoyzdwdBpH279X8/N0DgmotEI9yFKb5O/cAgoie/CkQZCH/MOmh0xw/KEfS90zY2A==
+  dependencies:
+    eslint-utils "^3.0.0"
+    natural-compare "^1.4.0"
+    semver "^7.3.5"
+    vue-eslint-parser "^8.0.1"
+
+eslint-plugin-vue@^8.2.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-8.3.0.tgz#2ae4f915ed3541a58c4a4c1145c1e60b86aa7e85"
+  integrity sha512-IIuLHw4vQxGlHcoP2dG6t/2OVdQf2qoyAzEGAxreU1afZOHGA7y3TWq8I+r3ZA6Wjs6xpeUWGHlT31QGr9Rb5g==
   dependencies:
     eslint-utils "^3.0.0"
     natural-compare "^1.4.0"
@@ -5642,9 +5657,9 @@ lines-and-columns@^1.1.6:
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
 lint-staged@^12.1.2:
-  version "12.1.5"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.5.tgz#e05582fc39aed5cb13b9dd1dfb8330407246d809"
-  integrity sha512-WyKb+0sNKDTd1LwwAfTBPp0XmdaKkAOEbg4oHE4Kq2+oQVchg/VAcjVQtSqZih1izNsTURjc2EkhG/syRQUXdA==
+  version "12.1.7"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.7.tgz#fe9137992ac18a456422bb8484dd30be0140629f"
+  integrity sha512-bltv/ejiLWtowExpjU+s5z8j1Byjg9AlmaAjMmqNbIicY69u6sYIwXGg0dCn0TlkrrY2CphtHIXAkbZ+1VoWQQ==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
@@ -8117,9 +8132,9 @@ rxjs@^6.6.0:
     tslib "^1.9.0"
 
 rxjs@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.1.tgz#af73df343cbcab37628197f43ea0c8256f54b157"
-  integrity sha512-KExVEeZWxMZnZhUZtsJcFwz8IvPvgu4G2Z2QyqjZQzUGr32KDYuSxrEYO4w3tFFNbfLozcrKUTvTPi+E9ywJkQ==
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.2.tgz#11e4a3a1dfad85dbf7fb6e33cbba17668497490b"
+  integrity sha512-PwDt186XaL3QN5qXj/H9DGyHhP3/RYYgZZwqBv9Tv8rsAaiwFH1IsJJlcgD37J7UW5a6O67qX0KWKS3/pu0m4w==
   dependencies:
     tslib "^2.1.0"
 
@@ -8672,12 +8687,12 @@ string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2
     strip-ansi "^6.0.1"
 
 string-width@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-5.0.1.tgz#0d8158335a6cfd8eb95da9b6b262ce314a036ffd"
-  integrity sha512-5ohWO/M4//8lErlUUtrFy3b11GtNOuMOU0ysKCDXFcfXuuvUXu95akgj/i8ofmaGdN0hCqyl6uu9i8dS/mQp5g==
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-5.1.0.tgz#5ab00980cfb29f43e736b113a120a73a0fb569d3"
+  integrity sha512-7x54QnN21P+XL/v8SuNKvfgsUre6PXpN7mc77N3HlZv+f1SBRGmjxtOud2Z6FZ8DmdkD/IdjCaf9XXbnqmTZGQ==
   dependencies:
+    eastasianwidth "^0.2.0"
     emoji-regex "^9.2.2"
-    is-fullwidth-code-point "^4.0.0"
     strip-ansi "^7.0.1"
 
 string.prototype.trimend@^1.0.4:

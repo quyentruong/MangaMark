@@ -6,28 +6,42 @@
     </div>
     <v-card v-else>
       <v-card-title>
+        <v-row>
+          <v-col xl="1" lg="1" md="2" sm="2" cols="12">
+            <v-select v-model="enabled" :items="slots" label="Slot" />
+          </v-col>
+          <v-col xl="1" lg="1" md="2" sm="2" cols="12">
+            <v-select v-model="filter" :items="filterSlot" label="Filter" />
+          </v-col>
+          <v-col xl="9" lg="9" md="6" sm="6" cols="12">
+            <v-text-field
+              v-model="search"
+              prepend-inner-icon="mdi-magnify"
+              single-line
+              :placeholder="searchPlaceholder"
+              clearable
+              hide-details
+              filled
+              rounded
+              dense
+            />
+          </v-col>
+          <v-spacer />
+          <v-col>
+            <AddNewItem :enabled="enabled" @modifyItem="modifyChild" />
+          </v-col>
+        </v-row>
+
         <!--        Starting Slot-->
-        <v-select v-model="enabled" :items="slots" label="Slot" />
+        <!-- <v-select v-model="enabled" :items="slots" label="Slot" /> -->
         <!--        Ending Slot-->
-        <v-spacer />
+        <!-- <v-spacer /> -->
         <!--        Starting Filter-->
 
-        <v-text-field
-          v-model="search"
-          prepend-inner-icon="mdi-magnify"
-          label="Search"
-          single-line
-          clearable
-          hide-details
-          filled
-          rounded
-          dense
-        />
-
         <!--        Ending Filter-->
-        <v-spacer />
+        <!-- <v-spacer /> -->
         <!--        Starting Add new item-->
-        <AddNewItem :enabled="enabled" @modifyItem="modifyChild" />
+
         <!--        Ending Add new Item-->
       </v-card-title>
       <!--      Starting datatable-->
@@ -160,6 +174,17 @@ export default {
       headersSlot: {},
       items: [],
       modelstate: {},
+      searchPlaceholder: 'Filter by name. Ex: Naruto',
+      filter: 'name=',
+      filterSlot: [
+        'name=',
+        'chapter=',
+        'chapter>',
+        'chapter<',
+        'year=',
+        'month=',
+        'day=',
+      ],
     }
   },
   head: () => ({
@@ -179,7 +204,22 @@ export default {
         array: this.headersSlot[slot],
       })
       this.fetchItem()
+
       this.options = this.$warehouse.get(`options_${slot}`, {})
+    },
+    filter() {
+      this.search = ''
+      if (this.filter.includes('name')) {
+        this.searchPlaceholder = 'Filter by name. Ex: Naruto'
+      } else if (this.filter.includes('chapter')) {
+        this.searchPlaceholder = 'Filter by chapter. Ex: 1'
+      } else if (this.filter.includes('year')) {
+        this.searchPlaceholder = 'Filter by year. Ex: 2020'
+      } else if (this.filter.includes('month')) {
+        this.searchPlaceholder = 'Filter by month. Ex: 2020-01'
+      } else if (this.filter.includes('day')) {
+        this.searchPlaceholder = 'Filter by day. Ex: 2020-01-01'
+      }
     },
   },
   created() {
@@ -190,8 +230,11 @@ export default {
     this.options = this.$warehouse.get(`options_${this.enabled}`, {})
   },
   methods: {
+    // searchPlaceholder() {
+    //   return `Searchs ${this.enabled}`
+    // },
     customFilter(value, search, items) {
-      return customFilterHelper(this.$moment, search, items)
+      return customFilterHelper(this.$moment, search, items, this.filter)
       // eslint-disable-next-line camelcase
 
       // const {
