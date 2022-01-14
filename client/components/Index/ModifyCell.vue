@@ -6,31 +6,13 @@
     @cancel="cancel(cell)"
     @open="open"
   >
-    <template v-if="columnName === 'other_name'">
-      <v-text-field
-        v-if="cell.item[columnName] === null"
-        readonly
-        placeholder="Add other name"
-      />
-      <span
-        v-else
-        :class="[columnName === 'name' ? 'itemName' : '', oldRead()]"
-        >{{ cell.item[columnName] }}</span
-      >
-    </template>
-    <span
-      v-else
-      :class="[columnName === 'name' ? 'itemName' : '', oldRead()]"
-      >{{ compressTitle(cell.item[columnName]) }}</span
-    >
+    <span :class="[columnName === 'name' ? 'itemName' : '', oldRead()]">{{
+      compressTitle(cell.item[columnName])
+    }}</span>
     <template #input>
       <v-text-field
         v-model="cell.item[columnName]"
-        :type="
-          columnName === 'name' || columnName === 'other_name'
-            ? 'text'
-            : 'number'
-        "
+        :type="columnName === 'name' ? 'text' : 'number'"
         label="Edit"
         single-line
         counter
