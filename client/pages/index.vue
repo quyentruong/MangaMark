@@ -51,6 +51,8 @@
         :items="items"
         :search="search"
         :options.sync="options"
+        :loading="isLoading"
+        loading-text="Loading... Please wait"
         hide-default-footer
         @page-count="pageCount = $event"
       >
@@ -165,6 +167,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       editable: false,
       options: {},
       pageCount: 0,
@@ -198,11 +201,13 @@ export default {
       deep: true,
     },
     enabled(slot) {
+      this.isLoading = true
       this.$warehouse.set('slot', slot)
       this.$store.commit('setArrayHeader', {
         slot,
         array: this.headersSlot[slot],
       })
+      this.items = []
       this.fetchItem()
 
       this.options = this.$warehouse.get(`options_${slot}`, {})
@@ -272,6 +277,7 @@ export default {
     oldRead(props) {
       // console.log(props)
     },
+
     modifyChild() {
       this.fetchItem()
       this.search = ''
@@ -281,6 +287,9 @@ export default {
         `category/${this.enabled.toLowerCase()}/`
       )
       this.items = data
+      setTimeout(() => {
+        this.isLoading = false
+      }, 1 * 1000)
     },
 
     deleteItem(item) {
