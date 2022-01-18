@@ -14,11 +14,11 @@
         </v-btn>
       </v-toolbar-title>
       <v-spacer />
-      <v-label v-if="$auth.user.id === 1">{{
+      <v-label v-if="$auth.loggedIn && $auth.user.id === 1">{{
         $vuetify.breakpoint.name
       }}</v-label>
       <v-spacer />
-      <v-label v-if="$auth.user.id === 1">{{
+      <v-label v-if="$auth.loggedIn && $auth.user.id === 1">{{
         $vuetify.breakpoint.width
       }}</v-label>
       <v-btn icon @click="setDark">
