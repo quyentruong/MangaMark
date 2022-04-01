@@ -78,7 +78,21 @@ export default {
         })
     },
     simplePlusMinus(a, b, action) {
-      const result = action === '+' ? a + b : a - b
+      const increaser = (a, b) => {
+        if (Number.isSafeInteger(a)) {
+          return a + b
+        } else {
+          return Math.ceil(a)
+        }
+      }
+      const decreaser = (a, b) => {
+        if (Number.isSafeInteger(a)) {
+          return a - b
+        } else {
+          return Math.floor(a)
+        }
+      }
+      const result = action === '+' ? increaser(a, b) : decreaser(a, b)
       return result === 0 ? -1 : result
     },
   },

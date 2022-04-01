@@ -279,16 +279,19 @@ export default {
     },
 
     modifyChild() {
-      this.fetchItem()
+      // this.fetchItem()
       this.search = ''
     },
     async fetchItem() {
+      setTimeout(() => {
+        this.items = []
+      }, 1 * 1000)
       const { data } = await this.$axios.$get(
         `category/${this.enabled.toLowerCase()}/`
       )
-      this.items = data
       setTimeout(() => {
         this.isLoading = false
+        this.items = data
       }, 1 * 1000)
     },
 
@@ -307,16 +310,23 @@ export default {
     },
 
     googleItem(name, season, quantity) {
+      const increaser = (quantity) => {
+        if (Number.isSafeInteger(quantity)) {
+          return quantity + 1
+        } else {
+          return Math.ceil(quantity)
+        }
+      }
       let url = encodeURI(
         `https://www.google.com/search?q=${name} season ${parseInt(
           season
-        )} episode ${parseFloat(quantity) + 1}`
+        )} episode ${increaser(parseFloat(quantity))}`
       )
       if (this.enabled === 'Manga') {
         url = encodeURI(
-          `https://www.google.com/search?q=${name} chapter ${
-            parseFloat(quantity) + 1
-          }`
+          `https://www.google.com/search?q=${name} chapter ${increaser(
+            parseFloat(quantity)
+          )}`
         )
       }
       window.open(url, '_blank')
