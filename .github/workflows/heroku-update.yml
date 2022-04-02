@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
 
 env:
   APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
