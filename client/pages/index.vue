@@ -167,6 +167,7 @@ export default {
   },
   data() {
     return {
+      timer: '',
       isLoading: false,
       editable: false,
       options: {},
@@ -233,6 +234,10 @@ export default {
     // this.enabled = this.$warehouse.get('slot', 'Manga')
     // this.fetchItem()
     this.options = this.$warehouse.get(`options_${this.enabled}`, {})
+    this.timer = setInterval(this.fetchItem, 5 * 60 * 1000)
+  },
+  beforeDestroy() {
+    this.cancelAutoUpdate()
   },
   methods: {
     // searchPlaceholder() {
@@ -283,6 +288,10 @@ export default {
       this.search = ''
     },
     async fetchItem() {
+      this.$store.dispatch('setSnackbar', {
+        color: 'info',
+        text: `Refresh data`,
+      })
       setTimeout(() => {
         this.items = []
       }, 1 * 1000)
@@ -293,6 +302,10 @@ export default {
         this.isLoading = false
         this.items = data
       }, 1 * 1000)
+    },
+
+    cancelAutoUpdate() {
+      clearInterval(this.timer)
     },
 
     deleteItem(item) {
