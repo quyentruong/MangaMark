@@ -284,8 +284,8 @@ export default {
     },
 
     modifyChild() {
-      // this.fetchItem()
       this.search = ''
+      this.fetchItem()
     },
     async fetchItem() {
       this.$store.dispatch('setSnackbar', {
