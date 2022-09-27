@@ -20,7 +20,9 @@
               :rules="[required('Password')]"
               label="Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show ? 'text' : 'password'"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show = !show"
             />
           </v-form>
         </v-card-text>
@@ -42,6 +44,7 @@ export default {
   name: 'Login',
   auth: 'guest',
   data: () => ({
+    show: false,
     form: {},
     ...validations,
   }),

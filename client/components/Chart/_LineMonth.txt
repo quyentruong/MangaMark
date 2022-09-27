@@ -1,0 +1,69 @@
+/* eslint-disable */
+<template>
+  <div id="chart">
+    <apexchart
+      type="line"
+      height="350"
+      :options="chartOptions"
+      :series="series"
+    ></apexchart>
+  </div>
+</template>
+<script>
+export default {
+  data: () => ({
+    series: [],
+    chartOptions: {}
+  }),
+
+  async created() {
+    // console.log(this.$vuetify.theme.dark)
+    const data = await this.$axios.$get(
+      `chart/line/month/1/manga/${this.$auth.user.id}/`
+    )
+    const weekStart = []
+    const total = []
+    for (let i = 0; i < data.data.length; i++) {
+      const d = data.data[i]
+      weekStart.push(d.WeekStart)
+      total.push(d.Total)
+    }
+    this.series = [
+      {
+        name: 'Manga',
+        data: total
+      }
+    ]
+    this.chartOptions = {
+      theme: {
+        mode: this.$warehouse.get('chartTheme')
+      },
+      chart: {
+        height: 350,
+        type: 'line',
+        zoom: {
+          enabled: true
+        }
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      title: {
+        text: 'Manga read in a month',
+        align: 'left'
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        }
+      },
+
+      xaxis: {
+        categories: weekStart
+      }
+    }
+    console.log(weekStart)
+  }
+}
+</script>

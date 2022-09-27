@@ -141,19 +141,19 @@ return [
 //            ],
         ],
 
-        'slack' => [
-            'webhook_url' => 'https://hooks.slack.com/services/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',
-
-            /*
-             * If this is set to null the default channel of the webhook will be used.
-             */
-            'channel' => null,
-
-            'username' => null,
-
-            'icon' => null,
-
-        ],
+//        'slack' => [
+//            'webhook_url' => 'https://hooks.slack.com/services/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',
+//
+//            /*
+//             * If this is set to null the default channel of the webhook will be used.
+//             */
+//            'channel' => null,
+//
+//            'username' => null,
+//
+//            'icon' => null,
+//
+//        ],
     ],
 
     /*

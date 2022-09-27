@@ -16,6 +16,6 @@ class MangasTableSeeder extends Seeder
     public function run()
     {
         DB::table('mangas')->truncate();
-        Manga::factory(100)->create();
+        Manga::factory(300)->create();
     }
 }

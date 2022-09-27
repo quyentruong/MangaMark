@@ -15,8 +15,59 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
+//SELECT DATE_FORMAT(ADDDATE(buy.date_created, INTERVAL -DAYOFWEEK(buy.date_created) DAY),"%Y-%m-%d") as week, COUNT(*) AS total FROM buy GROUP BY week;
 class MangaController extends Controller
 {
+    public function year($number, $user_id)
+    {
+        $end_date = date('Y-m-d');
+        $start_date = strtotime("-{$number} year", strtotime($end_date));
+        $start_date = date("Y-m-d", $start_date);
+        $chapters = User::find($user_id)->mangas()
+            ->selectRaw("Month(updated_at), COUNT(id) AS total")
+            ->whereDate("updated_at", '>=', $start_date)
+            ->groupByRaw('Month(updated_at)')
+            ->get();
+        return response()->json([
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'data' => $chapters
+        ]);
+    }
+
+    public function month($number, $user_id)
+    {
+        $end_date = date('Y-m-d');
+        $start_date = strtotime("-{$number} month", strtotime($end_date));
+        $start_date_in_week = date("w", $start_date);
+        $start_date = strtotime("-{$start_date_in_week} days", $start_date);
+        $start_date = date("Y-m-d", $start_date);
+        $chapters = User::find($user_id)->mangas()
+            ->selectRaw("DATE_FORMAT(ADDDATE(updated_at, INTERVAL + 1 - DAYOFWEEK(updated_at) DAY),'%m-%d-%Y') as WeekStart, COUNT(id) AS Total")
+            ->whereDate("updated_at", '>=', $start_date)
+            ->groupByRaw('WeekStart')
+            ->get();
+//        $chapters = User::find($user_id)->mangas()
+//            ->selectRaw('DATE(updated_at) as date, count(id)')
+//            ->whereBetween('updated_at', [$start_date, $end_date])
+//            ->groupByRaw('DATE(updated_at)')
+//            ->get();
+//        $chapters = User::find($user_id)->mangas()->whereBetween('updated_at', [$start_date, $end_date])->groupBy('quantity')->get();
+        return response()->json([
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'data' => $chapters
+        ]);
+    }
+
+    public function quantity($user_id)
+    {
+        $chapters = User::find($user_id)->mangas()->sum('quantity');
+        return response()->json([
+            'data' => $chapters
+        ]);
+    }
+
     public function delete_all($user_id)
     {
         User::find($user_id)->mangas()->delete();

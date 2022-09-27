@@ -16,7 +16,9 @@
               :error-messages="modelstate['current_password']"
               label="Current Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show1 ? 'text' : 'password'"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show1 = !show1"
             />
 
             <v-text-field
@@ -24,7 +26,9 @@
               :rules="[required('New Password'), minLength('Password', 8)]"
               label="New Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show2 ? 'text' : 'password'"
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show2 = !show2"
             />
 
             <v-text-field
@@ -38,7 +42,9 @@
               ]"
               label="Confirmation New Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show3 ? 'text' : 'password'"
+              :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show3 = !show3"
             />
           </v-form>
         </v-card-text>
@@ -57,6 +63,9 @@ import validations from '@/utils/validations'
 export default {
   name: 'PasswordForm',
   data: () => ({
+    show1: false,
+    show2: false,
+    show3: false,
     dialog: false,
     form: {},
     modelstate: {},

@@ -51,6 +51,7 @@ export default {
     'plugins/nuxt-client-clipboard2',
     'plugins/nuxt-client-dialog',
     'plugins/nuxt-client-capitalize',
+    'plugins/nuxt-client-apexcharts',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

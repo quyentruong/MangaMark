@@ -27,7 +27,9 @@
               :error-messages="modelstate['password']"
               label="New Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show1 ? 'text' : 'password'"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show1 = !show1"
             />
 
             <v-text-field
@@ -38,7 +40,9 @@
               ]"
               label="Confirmation New Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show2 ? 'text' : 'password'"
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show2 = !show2"
             />
           </v-form>
         </v-card-text>
@@ -56,6 +60,8 @@ export default {
   auth: 'guest',
   name: 'ResetPassword',
   data: () => ({
+    show1: false,
+    show2: false,
     modelstate: {},
     form: {},
     ...validations,

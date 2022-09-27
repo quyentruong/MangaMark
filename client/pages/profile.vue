@@ -54,12 +54,24 @@
             />
           </v-col>
         </v-row>
-        <v-text-field
-          :value="new Date($auth.user.created_at).toString()"
-          label="Created At"
-          prepend-icon="mdi-calendar"
-          disabled
-        />
+        <v-row>
+          <v-col>
+            <v-text-field
+              :value="new Date($auth.user.created_at).toString()"
+              label="Created At"
+              prepend-icon="mdi-calendar"
+              disabled
+            />
+          </v-col>
+          <v-col>
+            <v-text-field
+              :value="calculateDays()"
+              label="Days"
+              prepend-icon="mdi-view-day"
+              disabled
+            />
+          </v-col>
+        </v-row>
         <v-row>
           <v-col>
             <v-text-field
@@ -134,6 +146,13 @@ export default {
     this.api_key = this.$auth.user.api_key
   },
   methods: {
+    calculateDays() {
+      const oneDay = 24 * 60 * 60 * 1000 // hours*minutes*seconds*milliseconds
+      const firstDate = new Date(Date.now())
+      const secondDate = new Date(this.$auth.user.created_at)
+      const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+      return diffDays
+    },
     async generateKey() {
       await this.$axios.$put('generateapi', this.$auth.user).then((res) => {
         this.$store.dispatch('setSnackbar', { text: 'Generated API Key' })

@@ -19,7 +19,8 @@ class TVShowFactory extends Factory
             'name' => $this->faker->words($this->faker->numberBetween(3, 9), true),
             'user_id' => $this->faker->randomElement($users),
             'season' => $this->faker->numberBetween(1, 5),
-            'quantity' => $this->faker->numberBetween(1, 25)
+            'quantity' => $this->faker->numberBetween(1, 25),
+            'updated_at' => $this->faker->dateTimeBetween('-1 week')
         ];
     }
 }

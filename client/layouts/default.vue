@@ -12,6 +12,13 @@
         >
           <v-icon>mdi-chat-question</v-icon>
         </v-btn>
+        <!-- <v-btn
+          :color="$vuetify.theme.dark === true ? '' : 'white'"
+          to="/chart"
+          icon
+        >
+          <v-icon>mdi-chart-areaspline</v-icon>
+        </v-btn> -->
       </v-toolbar-title>
       <v-spacer />
       <v-label v-if="$auth.loggedIn && $auth.user.id === 1">{{
@@ -126,6 +133,10 @@ export default {
     setDark() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
       this.$warehouse.set('dark', this.$vuetify.theme.dark)
+      this.$warehouse.set(
+        'chartTheme',
+        this.$vuetify.theme.dark === true ? 'dark' : 'light'
+      )
     },
     source() {
       window.open('https://github.com/quyentruong/MangaMark')

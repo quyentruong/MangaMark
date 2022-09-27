@@ -31,7 +31,9 @@
               :error-messages="modelstate['password']"
               label="Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show1 ? 'text' : 'password'"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show1 = !show1"
             />
 
             <v-text-field
@@ -42,7 +44,9 @@
               ]"
               label="Confirmation Password"
               prepend-icon="mdi-lock"
-              type="password"
+              :type="show2 ? 'text' : 'password'"
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show2 = !show2"
             />
             <recaptcha @error="onError" @expired="onExpired" />
           </v-form>
@@ -61,6 +65,8 @@ export default {
   name: 'Register',
   auth: 'guest',
   data: () => ({
+    show1: false,
+    show2: false,
     modelstate: {},
     form: {},
     ...validations,

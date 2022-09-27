@@ -19,7 +19,8 @@ class MangaFactory extends Factory
             'name' => $this->faker->words($this->faker->numberBetween(3, 9), true),
             //        'name' => $faker->regexify('[A-Za-z0-9]{20}'),
             'user_id' => $this->faker->randomElement($users),
-            'quantity' => $this->faker->numberBetween(1, 100)
+            'quantity' => $this->faker->numberBetween(1, 50),
+            'updated_at' => $this->faker->dateTimeBetween('-5 month')
         ];
     }
 }
