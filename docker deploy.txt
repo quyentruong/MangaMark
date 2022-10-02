@@ -1,0 +1,20 @@
+cd server/laradock
+
+cp .env.example .env
+Then modify .env
+
+cp php-worker/laravel-scheduler.conf.example php-worker/laravel-scheduler.conf
+
+docker-compose -f docker-compose-prod.yml up -d
+
+docker-compose exec --user=laradock workspace zsh
+
+Test database inside docker
+php artisan db:show
+php artisan migrate:fresh
+php artisan db:seed
+
+
+Rebuild everything
+Delete volume folder .laradock
+docker-compose -f docker-compose-prod.yml up -d --build
