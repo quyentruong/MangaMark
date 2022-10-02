@@ -2,11 +2,12 @@ name: Heroku Update
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
 #   pull_request:
 #     branches: [ master ]
 
+# Heroku will stop free dyno after November 28, 2022. I will leave config here for anyone need it.
 env:
   APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
   API_KEY: ${{ secrets.HEROKU_API_KEY }}
