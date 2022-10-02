@@ -1,4 +1,6 @@
-cd server/laradock
+cd server
+cp docker-compose-prod.yml laradock/docker-compose-prod.yml
+cd laradock
 
 cp .env.example .env
 Then modify .env
