@@ -47,7 +47,7 @@
     "vuetify": "^2.6.10",
     "vuetify-confirm": "^2.0.6",
     "vuex-map-fields": "^1.4.1",
-    "webpack": "^4.46.0"
+    "webpack": "^5.94.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
