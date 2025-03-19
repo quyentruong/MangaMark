@@ -36,7 +36,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "apexcharts": "^3.35.4",
     "core-js": "^3.19.3",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.16.0",
     "store": "^2.0.12",
     "vue": "^3.0.0",
     "vue-apexcharts": "^1.6.2",
